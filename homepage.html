@@ -1,0 +1,63 @@
+<!doctype html>
+<title> DBL 10D </title>
+
+<style>
+ div {
+ width: 600px;
+ margin:0 auto;
+ text-align:center;
+ overflow: hidden;
+ border: 2px solid #cccccc;
+ padding: 10px;
+ box-sizing:border-box;
+ }
+ div p{
+ font-size:1.5em;
+ text-align:center;
+ }
+ div p:nth-child(2) {
+ font-size:1.1em;
+ }
+ #content {
+ width: 600px; height:600px;
+ margin:0 auto;
+ overflow:hidden;
+ }
+
+</style>
+
+<body>
+
+<div>
+    <h1> Welcome to our project website!</h1> <br/>
+    <h2> Visualize your Newick format files </h2>
+
+    <p>
+        We have designed our own visualization program,  <br/>
+        which is compatible for Newick tree format.
+    </p>
+
+
+</div>
+
+
+<div>
+    <form action = "#", method="get">
+        <span>
+        Upload file: <br/>
+        <input type="file" name="ufile"/>
+        <input type="submit"/>
+        </span>
+
+    </form>
+</div>
+
+<div id="content">
+    (data is visualized here)
+</div>
+
+<div id="footer">
+    <p><b>DBL 10D</b></p>
+</div>
+</body>
+
