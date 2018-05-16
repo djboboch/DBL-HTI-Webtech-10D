@@ -4,15 +4,76 @@
 <title>Upload</title>
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 </head>
-<body>
 
-<form id="upload-form" action="{{ url_for('upload') }}" method="POST" enctype="multipart/form-data">
+<style>
+    html {
+        height: 100%;
+    }
 
-    <strong>Files:</strong><br>
-    <input id="file-picker" type="file" name="file" value="Choose file" accept="tre" multiple >
-    <div id="msg"></div>
-    <input type="submit" value="Upload!" id="upload-button">
-</form>
+    body {
+        height: 100%;
+        margin: 0;
+        background: #8ebf94 linear-gradient(#96eeff, #8ebf94) no-repeat fixed;
+    }
+
+    .layout {
+        background-color: black;
+        border: 2px solid white;
+        width: 80%;
+        margin: auto;
+        text-align: center;
+    }
+
+    .body {
+        padding-top: 2vh;
+    }
+
+    #title {
+        height: 28vh;
+    }
+
+    #form {
+        height: 8vh;
+        padding-top: 1vh;
+        border-top-width: 0px;
+        border-bottom-width: 0px;
+    }
+
+    #footer {
+        height: 6vh;
+    }
+
+</style>
+
+<body text="white">
+<div class="body">
+<div class="layout" id="title">
+    <p style="font-size: 2em"> Welcome to our project website!</p>
+    <p>Made by: D.D.K. Kregtich, Jakub Jerzy Chrupek, Jan Jacob Cozijnsen, Robin Daniël van Hoorn, Yeochan Yoon and Zakaria Ameziane</p>
+    <hr>
+    <p> Visualize your Newick format files </p>
+
+    <p>
+        We have designed our own visualization program,  <br/>
+        which is compatible for Newick tree format.
+    </p>
+</div>
+
+<div class="layout" id="form">
+    <form id="upload-form" action="{{ url_for('upload') }}" method="POST" enctype="multipart/form-data">
+
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <strong>Files:</strong>
+        <input id="file-picker" type="file" name="file" value="Choose file" accept="tre" multiple >
+        <div id="msg"></div>
+        <input type="submit" value="Upload!" id="upload-button">
+    </form>
+</div>
+
+<div class="layout" id="footer">
+    <p><b>DBL 10D</b></p>
+</div>
+</div>
 </body>
 <script>
     $("#file-picker").change(function(){
@@ -32,4 +93,4 @@
         }
     } );
 </script>
-</html>
+
