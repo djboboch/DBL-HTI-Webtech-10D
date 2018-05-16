@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <title>Visual</title>
+    <script>
+        $( function() {
+            var availableTags = {{ aclist|tojson }};
+            $( "#text" ).autocomplete({
+                source: availableTags
+            });
+        });
+
+        $("#file-picker").change(function(){
+            var input = document.getElementById('file-picker');
+            for (var i=0; i<input.files.length; i++)
+            {
+                var ext= input.files[i].name.substring(input.files[i].name.lastIndexOf('.')+1).toLowerCase()
+                if (ext == 'tre')
+                {
+                    $("#msg").text("File is supported")
+                }
+                else
+                {
+                    $("#msg").text("File is NOT supported")
+                    document.getElementById("file-picker").value ="";
+                }
+            }
+        } );
+
+        $(function(){
+            // bind change event to select
+            $('#selectvis').on('change', function () {
+                var url = $(this).val(); // get selected value
+                if (url) { // require a URL
+                    window.location = url; // redirect
+                }
+            return false;
+            });
+        });
+
+    </script>
+
+    <style>
+        .ui-autocomplete {
+            max-height: 100px;
+            overflow-y: auto;
+            /* prevent horizontal scrollbar */
+            overflow-x: hidden;
+        }
+        /* IE 6 doesn't support max-height
+        * we use height instead, but this forces the menu to always be this tall
+        */
+        * html .ui-autocomplete {
+            height: 100px;
+        }
+
+        html {
+            height: 100%;
+        }
+
+        body {
+            height: 100%;
+            margin: 0;
+            background: #96eeff linear-gradient(#96eeff, #8ebf94) no-repeat fixed;
+        }
+
+        .layout {
+            background-color: black;
+            border: 2px solid white;
+            width: 80%;
+            margin: auto;
+            text-align: center;
+        }
+
+        .currentNode {
+            padding: 5px;
+            color: #8ebf94;
+        }
+
+        .parent {
+            padding: 5px;
+            color: #8ebf94;
+        }
+
+        .body {
+            padding-top: 2vh;
+        }
+
+        .children {
+            display: inline-block;
+            background-color: #8ebf94;
+            color: #ffffff;
+            padding: 3px;
+            margin: 2px;
+        }
+
+        #title {
+            height: 28vh;
+        }
+
+        #form {
+            height: 6vh;
+            padding-top: 1vh;
+            border-top-width: 0;
+            border-bottom-width: 0;
+        }
+
+        #footer {
+            height: 6vh;
+            margin-bottom: 2vh;
+        }
+
+        #visualisation {
+            min-height: 51vh;
+            padding-top: 1vh;
+            padding-bottom: 1vh;
+        }
+    </style>
+
+</head>
+<body text="white">
+<div class="body">
+    <div class="layout" id="title">
+        <p style="font-size: 2em"> Welcome to our project website!</p>
+        Made by: D.D.K. Kregtich, Jakub Jerzy Chrupek, Jan Jacob Cozijnsen, Robin Daniël van Hoorn, Yeochan Yoon and Zakaria Ameziane
+        <hr>
+        <p> Visualize your Newick format files </p>
+
+        <p>
+            We have designed our own visualization program,  <br/>
+            which is compatible for Newick tree format.
+        </p>
+    </div>
+
+    <div class="layout" id="form">
+        <form id="upload-form" action="{{ url_for('upload') }}" method="POST" enctype="multipart/form-data">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <strong>Files:</strong>
+            <input id="file-picker" type="file" name="file" value="Choose file" accept="tre" multiple >
+            <div id="msg"></div>
+            <input type="submit" value="Upload!" id="upload-button">
+        </form>
+    </div>
+
+    <div id="visualisation" class="layout">
+        <select id="selectvis">
+            <option value="" selected>Pick a visualisation</option>
+            <option value="/visualisation1/graph/0">visualization 1</option>
+            <option value="/visualisation2/graph/0">visualization 2</option>
+        </select>
+
+
+        {% if sv1 %}
+            <div id="visualisation1"> <!-- visualisation 1 -->
+                <!-- current node -->
+                <div>
+                    {% if nodeName %}
+                        <div class="currentNode">
+                            <b>name current node:</b> {{ nodeName }}
+                        </div>
+                    {% else %}
+                        <div class="currentNode">
+                            <b>name current node:</b> {{ t.name }}
+                        </div>
+                    {% endif %}
+                </div>
+
+
+                <!-- children current node -->
+                <div>
+                    {% if nodeName %}
+                        {% for child in nodeG.children %}
+                            <div onclick="location.href='/visualisation1/graph/{{ child.id }}';" class="children" style="cursor: pointer;">
+                                {{ child.name }}
+                                {% if nrg > 1 %}
+                                    {% for childg2 in child.children %}
+                                        <div onclick="location.href='/visualisation1/graph/{{ childg2.id }}';" class="childreng2" style="cursor:pointer;">
+                                            {{ childg2.name }}
+                                            {% if nrg > 2 %}
+                                                {% for childg3 in childg2.children %}
+                                                    <div onclick="location.href='/visualisation1/graph/{{ childg3.id }}';" class="childreng3" style="cursor:pointer;">
+                                                        {{ childg3.name }}
+                                                    </div>
+                                                {% endfor %}
+                                            {% endif %}
+                                        </div>
+                                    {% endfor %}
+                                {% endif %}
+                                {% if child.children %}
+                                    <br>Has children
+                                {% else %}
+                                    <br>is a leaf
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        {% for child in t.children %}
+                            <div onclick="location.href='/visualisation1/graph/{{ child.id }}';" class="children" style="cursor:pointer;">
+                                {{ child.name }}
+                                {% if child.children %}
+                                    <br>Has children
+                                {% else %}
+                                    <br>Is a leaf
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+
+
+
+                <!-- parent current node -->
+                <div>
+                    {% if nodeG != t %}
+                        <div onclick="location.href='/visualisation1/graph/{{ nodeG.up.id }}';" class="parent" style="cursor:pointer;">
+                            <b>name of parent of current node:</b> {{ nodeG.up.name }}
+                        </div>
+                    {% else %}
+                        <div class="parent">
+                            <b>The root (with id: </b>{{ t.id }})<b> of the tree does not have a parent</b>
+                        </div>
+                    {% endif %}
+                </div>
+
+                <!-- search -->
+                <br>
+                <input type="text" id="text" />
+                <input type="button" id="btn" value="Submit" onClick="javascript: window.location.replace('/visualisation1/search/' + document.getElementById('text').value);" />
+                <br>
+                {% if ss %}
+                    <b>Search was unsuccessful because there was no node found with that name.</b>
+                {% endif %}
+            </div>
+        {% endif %}
+
+    </div>
+
+    <div id="footer" class="layout">
+         <p><b>DBL 10D</b></p>
+    </div>
+</div>
+
+</body>
+</html>
