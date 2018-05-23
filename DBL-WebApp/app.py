@@ -16,7 +16,7 @@ sv2 = None  # show visualisation 2
 
 @app.route("/")
 def index():
-    return render_template("project1.html")
+    return render_template("upload.html")
 
 
 @app.route("/upload", methods=['POST'])
@@ -52,12 +52,12 @@ def processing():
 # visual 1
 @app.route('/visualisation1')
 def graphvisualize1():
-    return render_template("visual1.html", sv1=1, sv2=0)
+    return render_template("visual.html", sv1=1, sv2=0)
 
 
 @app.route('/visualisation2')
 def graphvisualize2():
-    return render_template("visual1.html", sv1=0, sv2=1)
+    return render_template("visual.html", sv1=0, sv2=1)
 
 
 def newicktojson(tree, nodeG):
