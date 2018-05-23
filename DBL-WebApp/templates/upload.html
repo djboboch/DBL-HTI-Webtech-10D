@@ -1,82 +1,95 @@
 <!DOCTYPE html>
 <html>
-<head>
-<title>Upload</title>
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-</head>
-
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <style>
-    html {
-        height: 100%;
-    }
-
-    body {
-        height: 100%;
-        margin: 0;
-        background: #8ebf94 linear-gradient(#96eeff, #8ebf94) no-repeat fixed;
-    }
-
-    .layout {
-        background-color: black;
-        border: 2px solid white;
-        width: 80%;
-        margin: auto;
-        text-align: center;
-    }
-
-    .body {
-        padding-top: 2vh;
-    }
-
-    #title {
-        height: 28vh;
-    }
-
-    #form {
+  #form {
         height: 8vh;
         padding-top: 1vh;
         border-top-width: 0px;
         border-bottom-width: 0px;
+        text-align: center;
     }
-
-    #footer {
-        height: 6vh;
-    }
-
+  header{
+  font-size:50px;
+  text-align: center;
+  }
+  iframe {
+  width:100%;
+  height:500%;
+  }
+  .panel {
+  margin: 15px;
+  }
 </style>
 
-<body text="white">
-<div class="body">
-<div class="layout" id="title">
-    <p style="font-size: 2em"> Welcome to our project website!</p>
-    <p>Made by: D.D.K. Kregtich, Jakub Jerzy Chrupek, Jan Jacob Cozijnsen, Robin Daniël van Hoorn, Yeochan Yoon and Zakaria Ameziane</p>
-    <hr>
-    <p> Visualize your Newick format files </p>
 
-    <p>
-        We have designed our own visualization program,  <br/>
-        which is compatible for Newick tree format.
-    </p>
+<header>
+  <a href=""> DBL 10D Project webapp </a>
+</header>
+
+
+
+<div class="row align-items-center">
+    <div class="col-xs-4">
+		<!-- introduction Panel -->
+		<div class="panel panel-default">
+			<div class="panel-heading">Introduction</div>
+			<p style="font-size: 2em"> Welcome to our project website!</p>
+        Made by: D.D.K. Kregtich, Jakub Jerzy Chrupek, Jan Jacob Cozijnsen, Robin Daniël van Hoorn, Yeochan Yoon and Zakaria Ameziane
+        <hr>
+        <p> Visualize your Newick format files </p>
+
+        <p>
+            We have designed our own visualization program,  <br/>
+            which is compatible for Newick tree format.
+        </p>
+		</div>
+
+		<!-- START PANEL 1 -->
+		<div class="panel panel-default">
+			<div class="panel-heading">Upload</div>
+			<form id="upload-form" action="{{ url_for('upload') }}" method="POST" enctype="multipart/form-data">
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<strong>Files:</strong>
+				<input id="file-picker" type="file" name="file" value="Choose file" accept="tre" multiple >
+				<div id="msg"></div>
+				<input type="submit" value="Upload!" id="upload-button">
+    		</form>
+		</div>
+		 <!-- END PANEL 1 -->
+
+        <!-- START PANEL 3 -->
+		<div class="panel panel-default">
+
+			<div class="panel-heading">youtube & report
+
+			</div>
+
+			<div class="panel-body" style="max-height:; overflow-y:scroll;">
+				<div class="col">
+					<iframe>youtube.com</iframe>
+				</div>
+			</div>
+		</div>
+        <!-- END PANEL 3 -->
+    </div>
+    <div class="col-xs-8">
+		<!-- START PANEL 2 -->
+		<div class="panel panel-default">
+			<div class="panel-heading">visualization 1 & 2</div>
+			<div class="panel-body" style="position:relative;">
+
+			</div>
+		</div>
+        <!-- END PANEL 2 -->
+    </div>
 </div>
 
-<div class="layout" id="form">
-    <form id="upload-form" action="{{ url_for('upload') }}" method="POST" enctype="multipart/form-data">
-
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <strong>Files:</strong>
-        <input id="file-picker" type="file" name="file" value="Choose file" accept="tre" multiple >
-        <div id="msg"></div>
-        <input type="submit" value="Upload!" id="upload-button">
-    </form>
-</div>
-
-<div class="layout" id="footer">
-    <p><b>DBL 10D</b></p>
-</div>
-</div>
-</body>
 <script>
-    $("#file-picker").change(function(){
+	$("#file-picker").change(function(){
         var input = document.getElementById('file-picker');
         for (var i=0; i<input.files.length; i++)
         {
@@ -94,3 +107,6 @@
     } );
 </script>
 
+
+
+</html>
