@@ -96,7 +96,7 @@
         <!-- START PANEL 3 -->
 		<div class="panel panel-default">
 			<div class="panel-heading">youtube & report</div>
-			<div class="panel-body" style="max-height:; overflow-y:scroll;">
+			<div class="panel-body" style="overflow-y:scroll;">
 				<div class="col">
 
 					<div class="row-xs-6" >
@@ -112,7 +112,7 @@
 		<div class="panel panel-default">
 			<div class="panel-heading">visualization 1 & 2
             </div>
-            <div class="panel-body" style="height: 500px;overflow-y: scroll;" id="visualisation">
+            <div class="panel-body" style="min-height: 500px" id="visualisation">
 
                     <select id="selectvis">
                         <option value="" selected>Pick a visualisation</option>
@@ -122,15 +122,18 @@
 
 
                     {% if sv1 %} <!-- sunburst visual -->
-                        <p id='root'>Node Path:</p>
-                        <div id="container">
+
+                        <div id="container" style="z-index: 1">
                         <svg id="sunburstsvg"></svg>
                         </div>
+                        <p id='root' height="200px" style="z-index: 2">Node Path:</p>
                     {% endif %}
 
 
                     {% if sv2 %} <!-- treevisual -->
-
+                        <div>
+                        <svg id="treesvg"></svg>
+                        </div>
                     {% endif %}
             </div>
         <!-- END PANEL 2 -->
@@ -154,11 +157,6 @@
             }
         }
     } );
-</script>
-
-
-<script>
-	<!-- d3 -->
 
 	d3.select("#container")
        .style("height", "89%") 	//#body should be renamed to id of parent object (document.getElementById("#visualisation").offsetHeight)
@@ -167,11 +165,9 @@
 	   .style("bottom", 0);
 
 
-	var width = document.getElementById("container").offsetWidth,
-		height = document.getElementById("container").offsetHeight,
+	var width = 1000,
+		height = 600,
 		radius = (Math.min(width,height) / 1.5);
-
-	var formatNumber = d3.format(",d");
 
 
 	var color = d3.scaleOrdinal(d3.schemeCategory20b);
@@ -183,7 +179,7 @@
 		.attr("height", height)
 		.append("g")
 			.attr("id", "groupg")
-			.attr("transform", "translate(" + width / 2 + "," + height + ")rotate(-90)");
+			.attr("transform", "translate(" + width/2 + "," + 0 + ")rotate(90)");
 
 	var partitioning = d3.partition();
 
@@ -200,18 +196,16 @@
 		.innerRadius(function(f) { return Math.max(0, y(f.y0)); })
 		.outerRadius(function(f) { return Math.max(0, y(f.y1)); })
 		.padAngle(.01)
-		.padRadius(radius / 3);
 
-	d3.json("/static/flare.json", function(error, nodeData) {
-		if(error) throw error;
+	d3.json("/static/treeconverted.json", function(error, nodeData) {
 
 
-		root = d3.hierarchy(nodeData);
+		rootsunburst = d3.hierarchy(nodeData);
 
-		root.sum(function(f) { return f.size });
+		rootsunburst.sum(function(f) { return f.size });
 
 		g.selectAll('g')
-			.data(partitioning(root).descendants())
+			.data(partitioning(rootsunburst).descendants())
 			.enter().append('g').attr("class", "node")
 			.append('path')
 			.attr("d", arc)
@@ -290,7 +284,7 @@
 	function mouseleave(f) {
 		d3.selectAll("path").on("mouseover", null);
 
-		g.selectAll("path")
+		d3.selectAll("path")
 			.transition()
 			.duration(500)
 			.style("opacity", 1)
@@ -308,7 +302,7 @@
 		.tween("scale", function() {
 			var xd = d3.interpolate(x.domain(), [f.x0, f.x1]),
 				yd = d3.interpolate(y.domain(), [f.y0, 1]),
-				yr = d3.interpolate(y.range(), [f.y0 ? 100 : 0, radius]);
+				yr = d3.interpolate(y.range(), [f.y0 ? 20 : 0, radius]);
 			return function(t) { x.domain(xd(t)); y.domain(yd(t)).range(yr(t)); };
 		  })
 		.selectAll("path")
@@ -317,7 +311,69 @@
 	};
 
 
-	<!-- end d3 -->
-    </script>
+
+
+	// Visualisation 2 Tree
+
+	// Creates the canvas for the SVG elements to be draw in
+    var canvas = d3.select('#treesvg')
+        .attr("width", width)
+        .attr("height", height)
+        .append("g")
+        .attr("transform", "translate(" + width/2 + "," + height/2 + ")");
+
+
+    // Initiates the tree object of the D3 library, defines the size seperations between each node
+    var tree = d3.tree()
+        .size([2 * Math.PI, 500])
+        .separation(function (a,b) { return (a.parent == b.parent ? 1 : 2) / a.depth;});
+
+    //Initiate the zoom object used for zooming
+
+    var zoom = d3.zoom();
+
+    // d3.json used to import json file localy need to be updated to html json reciver attribute in production
+    d3.json("/static/treeconverted.json", function( error, data) {
+        if (error) throw error;
+
+        //From the json data we create a hierary and pass it to the tree object
+        var treeroot = tree(d3.hierarchy(data));
+
+        //Used for testing and attrbute checking
+        console.log(treeroot.links());
+
+
+        //Creates link between each node
+        var link = canvas.selectAll('.link')
+            .data(treeroot.links())
+            .enter().append("path")
+            .attr("class", "link")
+            .attr("d", d3.linkRadial()
+                .angle(function(d) {return d.x;})
+                .radius(function(d) { return d.y;}));
+
+        //Draws node on the canvas
+        var treenode = canvas.selectAll('.node')
+            .data(treeroot.descendants())
+            .enter().append('g')
+            .attr("class", function(d) {return "treenode" + (d.children ? " rreenode--internal" : " treenode --leaf");})
+            .attr("transform", function(d) { return "translate(" + radialPoint(d.x, d.y) + ")";});
+
+        treenode.append('circle')
+            .attr('r', 2.5);
+
+        // treenode.append('text')
+        //     .style('fill', "black")
+        //     .attr('dy', '0.31em')
+        //     .attr('x', function(d){ return d.x < Math.PI === !d.children ? 6 : -6;})
+        //     .attr("text-anchor", function(d) { return d.x < Math.PI === !d.children ? "start" : "end";})
+        //     .attr('transform', function(d) { return "rotate(" + (d.x < Math.PI ? d.x - Math.PI /2 : d.x + Math.PI / 2) * 180 / Math.PI + ")";})
+        //     .text(function(d) { return d.name});
+    });
+
+    function radialPoint(x, y){
+        return [((y = +y) * Math.cos(x -= Math.PI / 2)), (y * Math.sin(x))];
+    }
+</script>
 
 </html>
