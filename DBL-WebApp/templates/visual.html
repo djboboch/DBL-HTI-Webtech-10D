@@ -1,20 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <title>Visual</title>
-    <script>
-        $( function() {
-            var availableTags = {{ aclist|tojson }};
-            $( "#text" ).autocomplete({
-                source: availableTags
-            });
-        });
+<html>
+  <meta charset="UTF-8">
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<style>
+  #form {
+        height: 8vh;
+        padding-top: 1vh;
+        border-top-width: 0px;
+        border-bottom-width: 0px;
+        text-align: center;
+  }
 
+  header{
+  font-size:50px;
+  text-align:center;
+  }
+  iframe {
+  width:100%;
+  height:500%;
+  }
+  .panel {
+  margin: 15px;
+  }
+</style>
+
+
+<header>
+  <a href="/"> DBL 10D Project webapp </a>
+</header>
+
+<script>
         $("#file-picker").change(function(){
             var input = document.getElementById('file-picker');
             for (var i=0; i<input.files.length; i++)
@@ -31,7 +52,6 @@
                 }
             }
         } );
-
         $(function(){
             // bind change event to select
             $('#selectvis').on('change', function () {
@@ -42,91 +62,14 @@
             return false;
             });
         });
+</script>
 
-    </script>
-
-    <style>
-        .ui-autocomplete {
-            max-height: 100px;
-            overflow-y: auto;
-            /* prevent horizontal scrollbar */
-            overflow-x: hidden;
-        }
-        /* IE 6 doesn't support max-height
-        * we use height instead, but this forces the menu to always be this tall
-        */
-        * html .ui-autocomplete {
-            height: 100px;
-        }
-
-        html {
-            height: 100%;
-        }
-
-        body {
-            height: 100%;
-            margin: 0;
-            background: #96eeff linear-gradient(#96eeff, #8ebf94) no-repeat fixed;
-        }
-
-        .layout {
-            background-color: black;
-            border: 2px solid white;
-            width: 80%;
-            margin: auto;
-            text-align: center;
-        }
-
-        .currentNode {
-            padding: 5px;
-            color: #8ebf94;
-        }
-
-        .parent {
-            padding: 5px;
-            color: #8ebf94;
-        }
-
-        .body {
-            padding-top: 2vh;
-        }
-
-        .children {
-            display: inline-block;
-            background-color: #8ebf94;
-            color: #ffffff;
-            padding: 3px;
-            margin: 2px;
-        }
-
-        #title {
-            height: 28vh;
-        }
-
-        #form {
-            height: 6vh;
-            padding-top: 1vh;
-            border-top-width: 0;
-            border-bottom-width: 0;
-        }
-
-        #footer {
-            height: 6vh;
-            margin-bottom: 2vh;
-        }
-
-        #visualisation {
-            min-height: 51vh;
-            padding-top: 1vh;
-            padding-bottom: 1vh;
-        }
-    </style>
-
-</head>
-<body text="white">
-<div class="body">
-    <div class="layout" id="title">
-        <p style="font-size: 2em"> Welcome to our project website!</p>
+<div class="row">
+    <div class="col-xs-4">
+        <!-- introduction Panel -->
+		<div class="panel panel-default">
+			<div class="panel-heading">Introduction</div>
+			<p style="font-size: 2em"> Welcome to our project website!</p>
         Made by: D.D.K. Kregtich, Jakub Jerzy Chrupek, Jan Jacob Cozijnsen, Robin Daniël van Hoorn, Yeochan Yoon and Zakaria Ameziane
         <hr>
         <p> Visualize your Newick format files </p>
@@ -135,115 +78,302 @@
             We have designed our own visualization program,  <br/>
             which is compatible for Newick tree format.
         </p>
+		</div>
+
+		<!-- START PANEL 1 -->
+        <div class="panel panel-default">
+			<div class="panel-heading">Upload</div>
+			<form id="upload-form" action="{{ url_for('upload') }}" method="POST" enctype="multipart/form-data">
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<strong>Files:</strong>
+				<input id="file-picker" type="file" name="file" value="Choose file" accept="tre" multiple >
+				<div id="msg"></div>
+				<input type="submit" value="Upload!" id="upload-button">
+    		</form>
+		</div>
+		 <!-- END PANEL 1 -->
+
+        <!-- START PANEL 3 -->
+		<div class="panel panel-default">
+			<div class="panel-heading">youtube & report</div>
+			<div class="panel-body" style="overflow-y:scroll;">
+				<div class="col">
+
+					<div class="row-xs-6" >
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/VM_GuERfihs" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>                    </div>
+
+				</div>
+			</div>
+		</div>
+        <!-- END PANEL 3 -->
     </div>
-
-    <div class="layout" id="form">
-        <form id="upload-form" action="{{ url_for('upload') }}" method="POST" enctype="multipart/form-data">
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <strong>Files:</strong>
-            <input id="file-picker" type="file" name="file" value="Choose file" accept="tre" multiple >
-            <div id="msg"></div>
-            <input type="submit" value="Upload!" id="upload-button">
-        </form>
-    </div>
-
-    <div id="visualisation" class="layout">
-        <select id="selectvis">
-            <option value="" selected>Pick a visualisation</option>
-            <option value="/visualisation1/graph/0">visualization 1</option>
-            <option value="/visualisation2/graph/0">visualization 2</option>
-        </select>
-
-
-        {% if sv1 %}
-            <div id="visualisation1"> <!-- visualisation 1 -->
-                <!-- current node -->
-                <div>
-                    {% if nodeName %}
-                        <div class="currentNode">
-                            <b>name current node:</b> {{ nodeName }}
-                        </div>
-                    {% else %}
-                        <div class="currentNode">
-                            <b>name current node:</b> {{ t.name }}
-                        </div>
-                    {% endif %}
-                </div>
-
-
-                <!-- children current node -->
-                <div>
-                    {% if nodeName %}
-                        {% for child in nodeG.children %}
-                            <div onclick="location.href='/visualisation1/graph/{{ child.id }}';" class="children" style="cursor: pointer;">
-                                {{ child.name }}
-                                {% if nrg > 1 %}
-                                    {% for childg2 in child.children %}
-                                        <div onclick="location.href='/visualisation1/graph/{{ childg2.id }}';" class="childreng2" style="cursor:pointer;">
-                                            {{ childg2.name }}
-                                            {% if nrg > 2 %}
-                                                {% for childg3 in childg2.children %}
-                                                    <div onclick="location.href='/visualisation1/graph/{{ childg3.id }}';" class="childreng3" style="cursor:pointer;">
-                                                        {{ childg3.name }}
-                                                    </div>
-                                                {% endfor %}
-                                            {% endif %}
-                                        </div>
-                                    {% endfor %}
-                                {% endif %}
-                                {% if child.children %}
-                                    <br>Has children
-                                {% else %}
-                                    <br>is a leaf
-                                {% endif %}
-                            </div>
-                        {% endfor %}
-                    {% else %}
-                        {% for child in t.children %}
-                            <div onclick="location.href='/visualisation1/graph/{{ child.id }}';" class="children" style="cursor:pointer;">
-                                {{ child.name }}
-                                {% if child.children %}
-                                    <br>Has children
-                                {% else %}
-                                    <br>Is a leaf
-                                {% endif %}
-                            </div>
-                        {% endfor %}
-                    {% endif %}
-                </div>
-
-
-
-                <!-- parent current node -->
-                <div>
-                    {% if nodeG != t %}
-                        <div onclick="location.href='/visualisation1/graph/{{ nodeG.up.id }}';" class="parent" style="cursor:pointer;">
-                            <b>name of parent of current node:</b> {{ nodeG.up.name }}
-                        </div>
-                    {% else %}
-                        <div class="parent">
-                            <b>The root (with id: </b>{{ t.id }})<b> of the tree does not have a parent</b>
-                        </div>
-                    {% endif %}
-                </div>
-
-                <!-- search -->
-                <br>
-                <input type="text" id="text" />
-                <input type="button" id="btn" value="Submit" onClick="javascript: window.location.replace('/visualisation1/search/' + document.getElementById('text').value);" />
-                <br>
-                {% if ss %}
-                    <b>Search was unsuccessful because there was no node found with that name.</b>
-                {% endif %}
+    <div class="col-xs-8">
+		<!-- START PANEL 2 -->
+		<div class="panel panel-default">
+			<div class="panel-heading">Visualization 1 & 2
             </div>
-        {% endif %}
+            <div class="panel-body" style="min-height: 500px" id="visualisation">
 
-    </div>
+                    <select id="selectvis">
+                        <option value="" selected>Pick a visualisation</option>
+                        <option value="/visualisation1">visualization 1</option>
+                        <option value="/visualisation2">visualization 2</option>
+                    </select>
 
-    <div id="footer" class="layout">
-         <p><b>DBL 10D</b></p>
+
+                    {% if sv1 %} <!-- sunburst visual -->
+
+                        <div id="container" style="z-index: 1">
+                        <svg id="sunburstsvg"></svg>
+                        </div>
+                        <p id='root' height="200px" style="z-index: 2">Node Path:</p>
+                    {% endif %}
+
+
+                    {% if sv2 %} <!-- treevisual -->
+                        <div>
+                        <svg id="treesvg"></svg>
+                        </div>
+                    {% endif %}
+            </div>
+        <!-- END PANEL 2 -->
+        </div>
     </div>
 </div>
+<script>
+	$("#file-picker").change(function(){
+        var input = document.getElementById('file-picker');
+        for (var i=0; i<input.files.length; i++)
+        {
+            var ext= input.files[i].name.substring(input.files[i].name.lastIndexOf('.')+1).toLowerCase()
+            if (ext == 'tre')
+            {
+                $("#msg").text("File is supported")
+            }
+            else
+            {
+                $("#msg").text("File is NOT supported")
+                document.getElementById("file-picker").value ="";
+            }
+        }
+    } );
 
-</body>
+	d3.select("#container")
+       .style("height", "89%") 	//#body should be renamed to id of parent object (document.getElementById("#visualisation").offsetHeight)
+       .style("width", "100%")		//#body should be renamed to id of parent (object document.getElementById("#visualisation").offsetWidth)
+	   .style("position", "relative")
+	   .style("bottom", 0);
+
+
+	var width = 1000,
+		height = 600,
+		radius = (Math.min(width,height) / 1.5);
+
+
+	var color = d3.scaleOrdinal(d3.schemeCategory20b);
+
+	const circle = Math.PI;
+
+	var g = d3.select('#sunburstsvg')
+		.attr("width", width)
+		.attr("height", height)
+		.append("g")
+			.attr("id", "groupg")
+			.attr("transform", "translate(" + width/2 + "," + 0 + ")rotate(90)");
+
+	var partitioning = d3.partition();
+
+	var x = d3.scaleLinear()
+		.range([0, circle]);
+
+	var y = d3.scaleSqrt()
+		.range([0, radius]);
+
+
+	var arc = d3.arc()
+		.startAngle(function(f) { return Math.max(0, Math.min(circle, x(f.x0))); })
+		.endAngle(function(f) { return Math.max(0, Math.min(circle, x(f.x1))); })
+		.innerRadius(function(f) { return Math.max(0, y(f.y0)); })
+		.outerRadius(function(f) { return Math.max(0, y(f.y1)); })
+		.padAngle(.01)
+
+	d3.json("/static/treeconverted.json", function(error, nodeData) {
+
+
+		rootsunburst = d3.hierarchy(nodeData);
+
+		rootsunburst.sum(function(f) { return f.size });
+
+		g.selectAll('g')
+			.data(partitioning(rootsunburst).descendants())
+			.enter().append('g').attr("class", "node")
+			.append('path')
+			.attr("d", arc)
+			.attr("display", null)
+			.style('stroke', '#fff')
+			.style("fill", function (f) { return color((f.children ? f : f.parent).data.name); }) //color(f.parent ? f.parent.data.name : f.data.name)
+			.style("opacity", 1)
+			.on("click", onclick)
+			.on("mouseover", mouseover);
+
+		/*
+		g.selectAll(".node")
+			.append("text")
+			.attr("transform", function(f) {
+					return ((f.depth == 0) ? "translate(" + arc.centroid(f) + ")" : "translate(" + arc.centroid(f) + ")rotate(" + textRotation(f) + ")" )})
+			.attr("dx", "-20")
+			.attr("dy", ".5em")
+			.text(function(f) {
+				if(f.depth <= 2) {
+					if(f.data.name.length < 10) {
+						return f.data.name
+					} else {
+						return ""
+					}
+				} else {
+					return ""
+				}
+			});
+		*/
+		d3.select("svg").on("mouseleave", mouseleave);
+
+	});
+
+	function mouseover(f) {
+		var ancestorSequence = nodeAncestors(f);
+
+		d3.selectAll("path")
+			.style("opacity", 0.3);
+
+		g.selectAll("path")
+			.filter(function(node) {
+				return (ancestorSequence.indexOf(node) >= 0); })
+			.style("opacity", 1);
+
+
+		d3.select("#root")
+			.style("visibility", "");
+
+		d3.select("#root").each(function(d, i) {
+			d3.select(this).text(function(h) {
+				var ancestorStringReverse = "";
+				while(true){
+					ancestorStringReverse += f.data.name + " ";
+					if(f.parent){
+						f = f.parent;
+					} else {
+						break;
+					}
+				}
+				var ancestorString = ancestorStringReverse.split(' ').reverse().join(' - ').substr(2);
+				return ancestorString;
+			});
+		});
+	};
+
+	function nodeAncestors(node) {
+		var pathNode2Root = [];
+		while(node.parent) {
+			pathNode2Root.unshift(node);
+			node = node.parent;
+		}
+		pathNode2Root.unshift(node);
+		return pathNode2Root;
+	};
+
+	function mouseleave(f) {
+		d3.selectAll("path").on("mouseover", null);
+
+		d3.selectAll("path")
+			.transition()
+			.duration(500)
+			.style("opacity", 1)
+			.on("end", function() {
+				d3.select(this).on("mouseover", mouseover);
+            });
+
+		d3.select("#root")
+			.style("visibility", "hidden");
+	};
+
+	function onclick(f) {
+	  g.transition()
+		.duration(500)
+		.tween("scale", function() {
+			var xd = d3.interpolate(x.domain(), [f.x0, f.x1]),
+				yd = d3.interpolate(y.domain(), [f.y0, 1]),
+				yr = d3.interpolate(y.range(), [f.y0 ? 20 : 0, radius]);
+			return function(t) { x.domain(xd(t)); y.domain(yd(t)).range(yr(t)); };
+		  })
+		.selectAll("path")
+		  .attrTween("d", function(f) { return function() { return arc(f); };
+		});
+	};
+
+
+
+
+	// Visualisation 2 Tree
+
+	// Creates the canvas for the SVG elements to be draw in
+    var canvas = d3.select('#treesvg')
+        .attr("width", width)
+        .attr("height", height)
+        .append("g")
+        .attr("transform", "translate(" + width/2 + "," + 0 + ")rotate(90)");
+
+
+    // Initiates the tree object of the D3 library, defines the size seperations between each node
+    var tree = d3.tree()
+        .size([Math.PI, 500])
+        .separation(function (a,b) { return (a.parent == b.parent ? 1 : 2) / a.depth;});
+
+    //Initiate the zoom object used for zooming
+
+    var zoom = d3.zoom();
+
+    // d3.json used to import json file localy need to be updated to html json reciver attribute in production
+    d3.json("/static/treeconverted.json", function( error, data) {
+        if (error) throw error;
+
+        //From the json data we create a hierary and pass it to the tree object
+        var treeroot = tree(d3.hierarchy(data));
+
+        //Used for testing and attrbute checking
+        console.log(treeroot.links());
+
+
+        //Creates link between each node
+        var link = canvas.selectAll('.link')
+            .data(treeroot.links())
+            .enter().append("path")
+            .attr("class", "link")
+            .attr("d", d3.linkRadial()
+                .angle(function(d) {return d.x;})
+                .radius(function(d) { return d.y;}));
+
+        //Draws node on the canvas
+        var treenode = canvas.selectAll('.node')
+            .data(treeroot.descendants())
+            .enter().append('g')
+            .attr("class", function(d) {return "treenode" + (d.children ? " rreenode--internal" : " treenode --leaf");})
+            .attr("transform", function(d) { return "translate(" + radialPoint(d.x, d.y) + ")";});
+
+        treenode.append('circle')
+            .attr('r', 2.5);
+
+        // treenode.append('text')
+        //     .style('fill', "black")
+        //     .attr('dy', '0.31em')
+        //     .attr('x', function(d){ return d.x < Math.PI === !d.children ? 6 : -6;})
+        //     .attr("text-anchor", function(d) { return d.x < Math.PI === !d.children ? "start" : "end";})
+        //     .attr('transform', function(d) { return "rotate(" + (d.x < Math.PI ? d.x - Math.PI /2 : d.x + Math.PI / 2) * 180 / Math.PI + ")";})
+        //     .text(function(d) { return d.name});
+    });
+
+    function radialPoint(x, y){
+        return [((y = +y) * Math.cos(x -= Math.PI / 2)), (y * Math.sin(x))];
+    }
+</script>
+
 </html>
