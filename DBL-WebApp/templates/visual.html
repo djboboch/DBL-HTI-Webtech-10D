@@ -110,7 +110,7 @@
     <div class="col-xs-8">
 		<!-- START PANEL 2 -->
 		<div class="panel panel-default">
-			<div class="panel-heading">visualization 1 & 2
+			<div class="panel-heading">Visualization 1 & 2
             </div>
             <div class="panel-body" style="min-height: 500px" id="visualisation">
 
@@ -320,12 +320,12 @@
         .attr("width", width)
         .attr("height", height)
         .append("g")
-        .attr("transform", "translate(" + width/2 + "," + height/2 + ")");
+        .attr("transform", "translate(" + width/2 + "," + 0 + ")rotate(90)");
 
 
     // Initiates the tree object of the D3 library, defines the size seperations between each node
     var tree = d3.tree()
-        .size([2 * Math.PI, 500])
+        .size([Math.PI, 500])
         .separation(function (a,b) { return (a.parent == b.parent ? 1 : 2) / a.depth;});
 
     //Initiate the zoom object used for zooming
