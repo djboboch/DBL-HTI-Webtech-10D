@@ -1,0 +1,49 @@
+circle,
+path {
+    cursor: pointer;
+}
+
+circle {
+    fill: none;
+    pointer-events: all;
+}
+
+#nodePath {
+    font-size: 1em;
+    float: left;
+}
+
+.node {
+    cursor: pointer;
+}
+
+.node circle {
+    fill: #fff;
+    stroke: steelblue;
+    stroke-width: 1.5px;
+}
+
+.node text {
+    font: 10px sans-serif;
+}
+
+.link {
+    fill: none;
+    stroke: #ccc;
+    stroke-width: 1.5px;
+}
+
+#wrapperVis {
+    width: 100vw;
+    border: 1px solid black;
+    overflow: hidden;
+}
+#treeVisualDiv {
+    float: left;
+    border: 1px solid yellow;
+}
+
+#sunburstVisualDiv {
+    float: left;
+    border: 1px solid blue;
+}
