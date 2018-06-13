@@ -1,9 +1,5 @@
-//
-// const d3v4 = require('d3v4');
-// const d3 = require('d3');
 
-var treePath = 'convertedTrees/randomasstree.json';
-
+var treePath = 'javascripts/treeconverted.json';
 
 // Constants
 const marginSunburst = {top: 400, right: 300, bottom: 400, left: 300},
@@ -11,8 +7,6 @@ const marginSunburst = {top: 400, right: 300, bottom: 400, left: 300},
     colorSunburst = d3v4.scaleOrdinal(d3v4.schemeCategory20),
     circleRadians = Math.PI,
 
-
-    //Selcts which HTML element to append and add sunburst
     sunburstSvg = d3.select("#sunburstVisualDiv").append("svg")
         .attr("id", 'sunburstVisual')
         .attr("width", marginSunburst.left + marginSunburst.right)
@@ -48,7 +42,7 @@ var centerSunburst,
 
 d3.json(treePath, function (error, data) {
     if (error) throw error;
-    sunburstRoot = data;
+    sunburstRoot = data
     // Determine variables (could not be done with v4 version of partition
     partition
         .value(function (f) {
@@ -74,14 +68,19 @@ d3.json(treePath, function (error, data) {
     // Design center circle for zoomout.
     centerSunburst = sunburstSvg.append("circle")
         .attr("r", radiusSunburst / 3)
-        .on("click", zoomOut);
+        .on("click", function(f) {
+            zoomOut(f);
+            if(!nodeIsCollapsed(getTreeObject(f))) {
+                collapseNode(getTreeObject(f));
+            }
+        });
 
     // Append hover text
     centerSunburst.append("title")
         .text("zoom out");
 
     // Make sunburst paths
-    pathSunburst = sunburstSvg.selectAll("path")
+    pathSunburst = sunburstSvg.selectAll(".sunburstPath")
         .data(partition.nodes(sunburstRoot).slice(1))
         .enter().append("path")
         .attr("class", 'sunburstPath')
@@ -92,11 +91,18 @@ d3.json(treePath, function (error, data) {
         .each(function (f) {
             this._current = updateArc(f);
         })
-        .on("click", function (f) {
-            zoomIn(f);
-            clickTree(getTreeObject(f));
+        .on("click", function(f) {
+            if(f.depth == 2) {
+                if(nodeIsCollapsed(getTreeObject(f.parent))) {
+                    clickTree(getTreeObject(f.parent));
+                }
+            }
+            if(nodeIsCollapsed(getTreeObject(f))) {
+                clickTree(getTreeObject(f));
+            }
+            zoom(f, f);
         })
-        .on("mouseover", function (f) {
+        .on("mouseover", function(f) {
             mouseoverSunburst(f);
             mouseoverTree(getTreeObject(f));
         });
@@ -104,7 +110,6 @@ d3.json(treePath, function (error, data) {
 
 // Assign zoom functions
 function zoomIn(f) {
-    if (f.depth > 1) f = f.parent;
     if (!f.children) return;
     zoom(f, f);
 }
@@ -163,12 +168,20 @@ function zoom(root, p) {
             .style("fill", function (f) {
                 return f.fill;
             })
-            .on("click", function (f) {
-                zoomIn(f);
-                clickTree(getTreeObject(f));
+            .on("click", function(f) {
+                if(f.depth == 2) {
+                    if(nodeIsCollapsed(getTreeObject(f.parent))) {
+                        clickTree(getTreeObject(f.parent));
+                    }
+                }
+                if(nodeIsCollapsed(getTreeObject(f))) {
+                    clickTree(getTreeObject(f));
+                }
+                zoom(f, f);
             })
-            .on("mouseover", function (f) {
+            .on("mouseover", function(f) {
                 mouseoverSunburst(f);
+                //console.log(f);
                 mouseoverTree(getTreeObject(f));
             })
             .each(function (f) {
@@ -180,19 +193,13 @@ function zoom(root, p) {
             .attrTween("d", function (f) {
                 return arcTween.call(this, updateArc(f));
             });
-
     });
-
-    // Resetting hover effect
-    mouseleaveSunburst(p);
+    mouseoverTree(p);
 }
-
-// Adding mouseleave function
-d3.select("sunburstVisual").on("mouseleave", mouseleaveSunburst);
-
 
 // Hover function
 function mouseoverSunburst(f) {
+    //mouseoverTree(getTreeObject(f));
     d3.selectAll(".sunburstPath")
         .style("opacity", 0.3);
 
@@ -217,16 +224,18 @@ function mouseoverSunburst(f) {
                 return colorSunburst(f.parent ? f.parent.name : f.name)
             })
             .style('display', 'inline-block')
-            .on('click', function () {
+            // .on('click', function () {
+            //     var object = d3.select(this).datum();
+            //     console.log(object);
+            //     if(object.depth > 0) {
+            //         zoom(object, object);
+            //     } else {
+            //         zoomOut(object);
+            //     }
+            //     mouseoverSunburst(object);
+            // })
+            .on('mouseover', function() {
                 var object = d3.select(this).datum();
-                if (object == f) {
-                    zoomIn(object);
-                }
-                else {
-                    zoomOut(object);
-                }
-                clickTree(getTreeObject(object));
-                mouseoverSunburst(object);
                 mouseoverTree(getTreeObject(object));
             })
             .style('margin', '3px')
@@ -239,19 +248,6 @@ function mouseoverSunburst(f) {
         f = f.parent;
     } while (f.parent);
 }
-
-// mouseleaveSunburst function
-function mouseleaveSunburst(f) {
-
-    d3v4.selectAll(".sunburstPath")
-        .transition()
-        .duration(500)
-        .style("opacity", 1)
-        .on("end", function () {
-            d3.select(this).on("mouseover", mouseoverSunburst);
-        });
-}
-
 
 function key(f) {
     var k = [];
@@ -273,14 +269,13 @@ function updateArc(f) {
 
 d3v4.select(self.frameElement).style("height", marginSunburst.top + marginSunburst.bottom + "px");
 
-
 /*====================================================================================================================*/
 /*=============================================TREE CODE==============================================================*/
 /*====================================================================================================================*/
 
 // constants
 const treeSvg = d3v4.select("#treeVisual"),
-    transitionTree = 750,
+    transitionTree = 300,
     widthTree = +treeSvg.attr("width"),
     heightTree = +treeSvg.attr("height"),
     dragAndZoom = d3v4.select("#treeVisual")
@@ -298,6 +293,10 @@ var start_x, start_y,
         .on("start", drag_start)
         .on("drag", drag_drag);
 
+var widthScale = d3v4.scaleLinear()
+    .domain([1,80])
+    .range([1, 10]);
+
 // get file
 d3v4.json(treePath, function (error, data) {
     if (error) throw error;
@@ -309,8 +308,8 @@ d3v4.json(treePath, function (error, data) {
     treeRoot.x0 = heightTree / 2;
     treeRoot.y0 = 100;
 
-    // // Collapse everything at start
-    // treeRoot.children.forEach(collapse);
+    // Collapse everything at start
+    treeRoot.children.forEach(collapse);
 
     update(treeRoot);
 
@@ -351,15 +350,17 @@ function update(treeSource) {
         .attr("transform", function (f) {
             return "translate(" + treeSource.y0 + "," + treeSource.x0 + ")";
         })
-        .on('click', function (f) {
-            if (f.data.children) {
+        .on('click', function(f) {
+            if(f.data.children) {
                 clickTree(f);
-                zoomIn(getSunburstObject(f));
-            } else {
-                null
-            }
+                if(getTreeObject(d3.select('.sunburstPath')[0][0].__data__).depth < f.depth) {
+                    zoom(getSunburstObject(f), getSunburstObject(f));
+                } else {
+                    zoomOut(getSunburstObject(f));
+                }
+            } else {null}
         })
-        .on('mouseover', function (f) {
+        .on('mouseover', function(f) {
             mouseoverTree(f);
             mouseoverSunburst(getSunburstObject(f));
         });
@@ -427,6 +428,7 @@ function update(treeSource) {
             return f.id;
         });
 
+
     // New links
     var linkEnter = link.enter().insert('path', "g")
         .attr("class", "link")
@@ -451,7 +453,8 @@ function update(treeSource) {
         .attr('d', function (f) {
             var o = {x: treeSource.x, y: treeSource.y}
             return diagonal(o, o)
-        });
+        })
+        .remove();
 
     // Store
     nodes.forEach(function (f) {
@@ -479,9 +482,6 @@ function clickTree(f) {
     } else {
         f.children = f._children;
         f._children = null;
-    }
-    if (nodeIsCollapsed(f.parent)) {
-        clickTree(f.parent);
     }
     update(f);
 }
@@ -538,18 +538,21 @@ function zoom_actions() {
 zoom_handler(treeSvg);
 drag_handler(dragAndZoom);
 
+/*====================================================================================================================*/
+/*=============================================Interaction============================================================*/
+/*====================================================================================================================*/
 
 function getSunburstObject(f) {
     var ids = ancestorsNodeIdTree(f);
     ids.pop();
     var currentNode = sunburstRoot;
-    while (ids) {
+    while(ids) {
         var currentNodeId = ids.pop();
-        if (currentNodeId == undefined) {
+        if(currentNodeId == undefined) {
             break;
         }
-        for (i = 0; i < currentNode._children.length; i++) {
-            if (currentNode._children[i].nodeId == currentNodeId) {
+        for(i = 0; i < currentNode._children.length; i++) {
+            if(currentNode._children[i].nodeId == currentNodeId) {
                 currentNode = currentNode._children[i];
                 break;
             }
@@ -561,7 +564,7 @@ function getSunburstObject(f) {
 
 function ancestorsNodeIdTree(f) {
     var list = [];
-    while (f) {
+    while(f) {
         list.push(f.data.nodeId);
         f = f.parent;
     }
@@ -573,12 +576,12 @@ function getTreeObject(f) {
     var ids = ancestorsNodeIdSunburst(f)
     ids.pop;
     var currentNode = treeRoot;
-    while (ids) {
+    while(ids) {
         var currentNodeId = ids.pop();
-        if (currentNodeId == undefined) {
+        if(currentNodeId == undefined) {
             break;
         }
-        if (currentNode.children != null) {
+        if(currentNode.children != null) {
             for (i = 0; i < currentNode.children.length; i++) {
                 if (currentNode.children[i].data.nodeId == currentNodeId) {
                     currentNode = currentNode.children[i];
@@ -600,7 +603,7 @@ function getTreeObject(f) {
 
 function ancestorsNodeIdSunburst(f) {
     var list = [];
-    while (f) {
+    while(f) {
         list.push(f.nodeId);
         f = f.parent;
     }
@@ -608,15 +611,24 @@ function ancestorsNodeIdSunburst(f) {
 }
 
 
-function nodeIsCollapsed(f) {
+function nodeIsCollapsed(f)  {
     var object = d3.selectAll('.node').filter(function (d) {
-        return d.data === f.data
-    })
-    if (object[0][1] == undefined) {
+         return d.data === f.data
+    });
+    if(object[0][1] == undefined) {
         return true;
     }
-    if (object[0][1].style.fill === 'lightsteelblue') {
+    if(object[0][1].style.fill === 'lightsteelblue') {
         return true;
     }
     return false;
+}
+
+function collapseNode(f) {
+    if (f.children) {
+        f._children = f.children
+        f._children.forEach(collapseNode)
+        f.children = null
+    }
+    update(f);
 }

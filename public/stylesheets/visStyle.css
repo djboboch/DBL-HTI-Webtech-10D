@@ -33,11 +33,6 @@ circle {
     stroke-width: 1.5px;
 }
 
-#wrapperVis {
-    width: 100vw;
-    border: 1px solid black;
-    overflow: hidden;
-}
 #treeVisualDiv {
     float: left;
     border: 1px solid yellow;

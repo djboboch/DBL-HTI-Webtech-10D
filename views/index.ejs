@@ -9,6 +9,7 @@
     <script src="/javascripts/d3v4.js"></script>
 
     <link rel="stylesheet" type="text/css" href="/stylesheets/indexStyle.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/visStyle.css">
     <script>
         var vizName = $('#viz-selector').find(":selected").text();
 
@@ -120,8 +121,8 @@
                                 Visualization 1
                                 </div>
                                 <!--Place for the sunburst visuzalization-->
-                                <div class="sunburstVisualDiv">
-                                </div>
+                                <div id="sunburstVisualDiv"></div>
+                                <div id='nodePath'></div>
                             </div>
                         </div>
 
@@ -164,6 +165,6 @@
         </div>
 </body>
 
-<script src="/javascripts/visualizations.js"></script>
+<script src="/javascripts/visual1.js"></script>
 
 </html>
