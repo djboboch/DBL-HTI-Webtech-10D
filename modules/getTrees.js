@@ -1,16 +1,13 @@
 const fs = require('fs');
 const treeFolder = 'convertedTrees';
 
-var trees = [];
+var trees;
 
 exports.addTrees = function()
 {
-    fs.readdir(treeFolder, function (err, files) {
-        if(err) throw err;
-        files.forEach(function (file) {
-            trees.push(file);
-        });
-    });
+    trees = fs.readdirSync(treeFolder)
+
+
 };
 
 exports.clearTrees = function(){

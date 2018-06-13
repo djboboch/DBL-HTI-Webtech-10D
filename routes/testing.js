@@ -8,7 +8,6 @@ var getT = require('../modules/getTrees');
 
 router.use(function(req,res,next){
     getT.addTrees();
-    interval
     next();
 });
 
@@ -19,7 +18,7 @@ router.get('/' ,function(req,res) {
 
     res.send(getT.getTrees());
 
-    getT.clearTrees();
+   // getT.clearTrees();
     res.end();
 });
 
