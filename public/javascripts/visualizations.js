@@ -1,6 +1,6 @@
-var d3 = require('d3');
-var d3v4 = require('d3v4');
-
+//
+// const d3v4 = require('d3v4');
+// const d3 = require('d3');
 
 var treePath = 'convertedTrees/randomasstree.json';
 
@@ -13,7 +13,7 @@ const marginSunburst = {top: 400, right: 300, bottom: 400, left: 300},
 
 
     //Selcts which HTML element to append and add sunburst
-    sunburstSvg = d3.select("#panel-body-sunburst").append("svg")
+    sunburstSvg = d3.select("#sunburstVisualDiv").append("svg")
         .attr("id", 'sunburstVisual')
         .attr("width", marginSunburst.left + marginSunburst.right)
         .attr("height", marginSunburst.top + marginSunburst.bottom)
@@ -46,7 +46,7 @@ var centerSunburst,
     pathSunburst,
     sunburstRoot;
 
-d3.json('convertedTrees/randomasstree.json', function (error, data) {
+d3.json(treePath, function (error, data) {
     if (error) throw error;
     sunburstRoot = data;
     // Determine variables (could not be done with v4 version of partition
@@ -279,7 +279,7 @@ d3v4.select(self.frameElement).style("height", marginSunburst.top + marginSunbur
 /*====================================================================================================================*/
 
 // constants
-const treeSvg = d3v4.select("#panel-body-tree"),
+const treeSvg = d3v4.select("#treeVisual"),
     transitionTree = 750,
     widthTree = +treeSvg.attr("width"),
     heightTree = +treeSvg.attr("height"),
