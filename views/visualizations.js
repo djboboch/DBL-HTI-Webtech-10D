@@ -1,30 +1,24 @@
-//Importing the modules
-const D3NODE = require('d3-node');
-const d3 = require('d3');
-const d3v4 = require('./d3v4');
+var d3 = require('d3');
+var d3v4 = require('d3v4');
 
-var options = {
 
-    d3Module: d3
-}
-
+var treePath = 'convertedTrees/randomasstree.json';
 
 
 // Constants
 const marginSunburst = {top: 400, right: 300, bottom: 400, left: 300},
     radiusSunburst = Math.min(marginSunburst.top, marginSunburst.right, marginSunburst.bottom, marginSunburst.left) - 10,
     colorSunburst = d3v4.scaleOrdinal(d3v4.schemeCategory20),
-    circleRadians = Math.PI;
-
-var d3n = new D3Node(options);
+    circleRadians = Math.PI,
 
 
-sunburstSvg = d3n.select("#sunburstVisualDiv").append("svg")
-    .attr("id", 'sunburstVisual')
-    .attr("width", marginSunburst.left + marginSunburst.right)
-    .attr("height", marginSunburst.top + marginSunburst.bottom)
-    .append("g")
-    .attr("transform", "translate(" + 0 + "," + marginSunburst.top + ")"),
+    //Selcts which HTML element to append and add sunburst
+    sunburstSvg = d3.select("#panel-body-sunburst").append("svg")
+        .attr("id", 'sunburstVisual')
+        .attr("width", marginSunburst.left + marginSunburst.right)
+        .attr("height", marginSunburst.top + marginSunburst.bottom)
+        .append("g")
+        .attr("transform", "translate(" + 0 + "," + marginSunburst.top + ")"),
 
     partition = d3.layout.partition()
         .sort(function (f, g) {
@@ -52,7 +46,7 @@ var centerSunburst,
     pathSunburst,
     sunburstRoot;
 
-d3.json("treeconvertednumbers.json", function (error, data) {
+d3.json('convertedTrees/randomasstree.json', function (error, data) {
     if (error) throw error;
     sunburstRoot = data;
     // Determine variables (could not be done with v4 version of partition
@@ -280,8 +274,12 @@ function updateArc(f) {
 d3v4.select(self.frameElement).style("height", marginSunburst.top + marginSunburst.bottom + "px");
 
 
+/*====================================================================================================================*/
+/*=============================================TREE CODE==============================================================*/
+/*====================================================================================================================*/
+
 // constants
-const treeSvg = d3v4.select("#treeVisual"),
+const treeSvg = d3v4.select("#panel-body-tree"),
     transitionTree = 750,
     widthTree = +treeSvg.attr("width"),
     heightTree = +treeSvg.attr("height"),
@@ -301,7 +299,7 @@ var start_x, start_y,
         .on("drag", drag_drag);
 
 // get file
-d3v4.json('treeconvertednumbers.json', function (error, data) {
+d3v4.json(treePath, function (error, data) {
     if (error) throw error;
 
     // initialize variables for start
@@ -311,8 +309,8 @@ d3v4.json('treeconvertednumbers.json', function (error, data) {
     treeRoot.x0 = heightTree / 2;
     treeRoot.y0 = 100;
 
-    // Collapse everything at start
-    treeRoot.children.forEach(collapse);
+    // // Collapse everything at start
+    // treeRoot.children.forEach(collapse);
 
     update(treeRoot);
 
@@ -453,8 +451,7 @@ function update(treeSource) {
         .attr('d', function (f) {
             var o = {x: treeSource.x, y: treeSource.y}
             return diagonal(o, o)
-        })
-        .remove();
+        });
 
     // Store
     nodes.forEach(function (f) {
@@ -476,7 +473,6 @@ function update(treeSource) {
 
 // clickTree function
 function clickTree(f) {
-    //zoomIn(getSunburstObject(f));
     if (f.children) {
         f._children = f.children;
         f.children = null;

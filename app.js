@@ -5,11 +5,12 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 
+
 //Variables linking to the routes
 const indexRouter = require('./routes/index');
 const about = require('./routes/about');
 const file_Upload = require('./routes/fileUpload');
-
+const testing = require('./routes/testing');
 
 var app = express();
 
@@ -24,10 +25,14 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 
+
+
 //Routing defining
 app.use('/', indexRouter);
 app.use('/about', about);
 app.use('/file_upload', file_Upload);
+app.use('/testing', testing);
+
 
 
 // catch 404 and forward to error handler
