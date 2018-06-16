@@ -7,7 +7,6 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="d3v3.js"></script>
     <script src="d3v4.js"></script>
-
     <link rel="stylesheet" type="text/css" href="/stylesheets/indexStyle.css">
     <link rel="stylesheet" type="text/css" href="/stylesheets/visStyle.css">
     <script>
@@ -122,19 +121,20 @@
                                 Visualization 1
                                 </div>
                                 <!--Place for the sunburst visuzalization-->
-                                <div id="sunburstVisualDiv"></div>
-                                <div id='nodePath'></div>
+                                <div id="sunburstVisualDiv">
+                                    <div id='nodePath'></div>
+                                </div>
                             </div>
                         </div>
 
                         <div class="col-xs-5">
                             <div class="panel panel-info">
-                                <div class="panel-heading">
+                                <div class="panel-heading" id="panelHeadingVis2">
                                  Visualization 2
                                 </div>
 
                                 <div id="treeVisualDiv">
-                                    <svg width="800" height="500" id="treeVisual"></svg>
+                                    <svg id="treeVisual"></svg>
                                 </div>
                             </div>
                         </div>
