@@ -243,7 +243,7 @@ function mouseoverSunburst(f) {
             })
             .style('margin', '3px')
             .style('padding', '3px')
-            .style('float', 'right')
+            //.style('float', 'right')
             .text(function (d) {
                 return f.name;
             })
@@ -374,7 +374,7 @@ function update(treeSource) {
         .attr('class', 'node')
         .attr('r', 1e-6)
         .style("fill", function (f) {
-            return f._children ? "lightsteelblue" : "#fff";
+            return f._children ? "#ffc0ab" : "#fff";
         });
 
     // Labels
@@ -404,7 +404,7 @@ function update(treeSource) {
     nodeUpdate.select('circle.node')
         .attr('r', 10)
         .style("fill", function (f) {
-            return f._children ? "lightsteelblue" : "#fff";
+            return f._children ? "#ffc0ab" : "#fff";
         })
         .attr('cursor', 'pointer');
 
@@ -608,10 +608,11 @@ function nodeIsCollapsed(f)  {
     var object = d3.selectAll('.node').filter(function (d) {
          return d.data === f.data
     });
+    console.log(object[0][1].style.fill);
     if(object[0][1] == undefined) {
         return true;
     }
-    if(object[0][1].style.fill === 'lightsteelblue') {
+    if(object[0][1].style.fill === 'rgb(255, 192, 171)') {
         return true;
     }
     return false;
