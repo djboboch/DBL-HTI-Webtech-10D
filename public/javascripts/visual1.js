@@ -2,17 +2,17 @@
 var treePath = 'randomasstree.json';
 
 // Constants
-const marginSunburst = {top: 400, right: 300, bottom: 400, left: 300},
+const marginSunburst = {top: 200, right: 100, bottom: 200, left: 100},
     radiusSunburst = Math.min(marginSunburst.top, marginSunburst.right, marginSunburst.bottom, marginSunburst.left) - 10,
     colorSunburst = d3v4.scaleOrdinal(d3v4.schemeCategory20),
-    circleRadians = Math.PI,
+    circleRadians = 2 * Math.PI,
 
     sunburstSvg = d3.select("#sunburstVisualDiv").append("svg")
         .attr("id", 'sunburstVisual')
-        .attr("width", marginSunburst.left + marginSunburst.right)
-        .attr("height", marginSunburst.top + marginSunburst.bottom)
+        .attr("width", '100%')
+        .attr("height", '400px')
         .append("g")
-        .attr("transform", "translate(" + 0 + "," + marginSunburst.top + ")"),
+        .attr("transform", "translate(" + 250 + "," + marginSunburst.top + ")"),
 
     partition = d3.layout.partition()
         .sort(function (f, g) {
@@ -275,27 +275,29 @@ d3v4.select(self.frameElement).style("height", marginSunburst.top + marginSunbur
 
 // constants
 const treeSvg = d3v4.select("#treeVisual"),
-    transitionTree = 300,
-    widthTree = +treeSvg.attr("width"),
-    heightTree = +treeSvg.attr("height"),
+    transitionTree = 0,
+    widthTree = +parseInt(treeSvg.style("width")),
+    heightTree = +parseInt(treeSvg.style("height")),
     dragAndZoom = d3v4.select("#treeVisual")
         .append("g")
-        .attr("class", "content");
+        .attr("class", "content")
+        .attr('transform', 'translate(' + widthTree/2 + ',' + heightTree/2 + ')');
 
 // variables
-var start_x, start_y,
-    i = 0,
+var i = 0,
     treeRoot,
-    tree = d3v4.tree().size([heightTree, widthTree]),
-    zoom_handler = d3v4.zoom()
+    tree = d3v4.tree()
+        .nodeSize([heightTree/3, widthTree * 3])
+        .separation(function(a, b) {
+            return a.parent == b.parent ? 1 : 1.25;
+        });
+
+
+var zoom_handler = d3v4.zoom()
         .on("zoom", zoom_actions),
     drag_handler = d3v4.drag()
         .on("start", drag_start)
         .on("drag", drag_drag);
-
-var widthScale = d3v4.scaleLinear()
-    .domain([1,80])
-    .range([1, 10]);
 
 // get file
 d3v4.json(treePath, function (error, data) {
@@ -305,9 +307,9 @@ d3v4.json(treePath, function (error, data) {
     treeRoot = d3v4.hierarchy(data, function (f) {
         return f.children;
     });
-    treeRoot.x0 = heightTree / 2;
-    treeRoot.y0 = 100;
 
+    treeRoot.x0 = 100;
+    treeRoot.y0 = 100;
     // Collapse everything at start
     treeRoot.children.forEach(collapse);
 
@@ -322,7 +324,6 @@ d3v4.json(treePath, function (error, data) {
         }
     }
 });
-
 
 d3v4.select(self.frameElement).style("height", "800px");
 
@@ -348,7 +349,7 @@ function update(treeSource) {
     var nodeEnter = node.enter().append('g')
         .attr('class', 'node')
         .attr("transform", function (f) {
-            return "translate(" + treeSource.y0 + "," + treeSource.x0 + ")";
+            return "translate(" + treeSource.x0 + "," + treeSource.x0 + ")";
         })
         .on('click', function(f) {
             if(f.data.children) {
@@ -409,7 +410,7 @@ function update(treeSource) {
     var nodeExit = node.exit().transition()
         .duration(transitionTree)
         .attr("transform", function (f) {
-            return "translate(" + treeSource.y + "," + treeSource.x + ")";
+            return "translate(" + treeSource.x + "," + treeSource.x + ")";
         })
         .remove();
 
@@ -513,21 +514,11 @@ function nodeAncestors(node) {
 // Drag and zoom functions
 
 function drag_start() {
-    start_x = +d3v4.event.x;
-    start_y = +d3v4.event.y;
 }
 
 function drag_drag(d) {
-    if (this.getAttribute("transform") === null) {
-        current_scale = 1;
-    }
-    else {
-        current_scale_string = this.getAttribute("transform").split(' ')[1];
-        current_scale = +current_scale_string.substring(6, current_scale_string.length - 1);
-    }
-    d3v4.select(this)
-        .attr("cx", d.x = start_x + ((d3v4.event.x - start_x) / current_scale))
-        .attr("cy", d.y = start_y + ((d3v4.event.y - start_y) / current_scale));
+    d.fx = 100+d3.event.x;
+    d.fy = 100+d3.event.y;
 }
 
 function zoom_actions() {
@@ -537,7 +528,6 @@ function zoom_actions() {
 // Assign handlers
 zoom_handler(treeSvg);
 drag_handler(dragAndZoom);
-
 /*====================================================================================================================*/
 /*=============================================Interaction============================================================*/
 /*====================================================================================================================*/
@@ -632,3 +622,12 @@ function collapseNode(f) {
     }
     update(f);
 }
+
+
+// function moveSvg(x, y) {
+//     d3v4.select('.content')
+//         .attr("cx", d.x = x)
+//         .attr("cy", d.y = y);
+// }
+//
+// moveSvg(100,100);
