@@ -19,6 +19,7 @@
     "jquery": "^3.3.1",
     "jsdom": "^11.11.0",
     "morgan": "~1.9.0",
+    "nodejs": "0.0.0",
     "python-shell": "^0.5.0",
     "serve-static": "^1.13.2",
     "xmldom": "^0.1.27"

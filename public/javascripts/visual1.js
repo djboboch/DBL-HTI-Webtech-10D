@@ -42,7 +42,7 @@ var centerSunburst,
 
 d3.json(treePath, function (error, data) {
     if (error) throw error;
-    sunburstRoot = data
+    sunburstRoot = data;
     // Determine variables (could not be done with v4 version of partition
     partition
         .value(function (f) {
@@ -69,11 +69,14 @@ d3.json(treePath, function (error, data) {
     centerSunburst = sunburstSvg.append("circle")
         .attr("r", radiusSunburst / 3)
         .on("click", function(f) {
-            zoomOut(f);
-            if(!nodeIsCollapsed(getTreeObject(f))) {
-                collapseNode(getTreeObject(f));
+            if(f.parent) {
+                zoomOut(f);
+                if (!nodeIsCollapsed(getTreeObject(f))) {
+                    collapseNode(getTreeObject(f));
+                }
             }
-        });
+        })
+        .style('fill', 'orange');
 
     // Append hover text
     centerSunburst.append("title")
@@ -289,7 +292,7 @@ var i = 0,
     tree = d3v4.tree()
         .nodeSize([heightTree/3, widthTree * 3])
         .separation(function(a, b) {
-            return a.parent == b.parent ? 1 : 1.25;
+            return a.parent == b.parent ? 1 : 1;
         });
 
 
