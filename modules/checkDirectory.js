@@ -1,8 +1,5 @@
 const fs = require('fs');
 
-
-
-
 exports.checkDirectory = function () {
 
     if (fs.existsSync('./convertedTrees')){
