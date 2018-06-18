@@ -4,11 +4,14 @@ var router = express.Router();
 
 var getT = require('../modules/getTrees');
 
+router.use(function(req,res,next){
+   getT.addTrees();
+   next();
+});
 
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    getT.addTrees();
 
 
     res.render('index', {
@@ -16,6 +19,7 @@ router.get('/', function(req, res, next) {
     });
 
   getT.clearTrees();
+  res.end();
 
 });
 

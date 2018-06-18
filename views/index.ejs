@@ -1,171 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="d3v3.js"></script>
-    <script src="d3v4.js"></script>
-
-    <link rel="stylesheet" type="text/css" href="/stylesheets/indexStyle.css">
-    <link rel="stylesheet" type="text/css" href="/stylesheets/visStyle.css">
-    <script>
-        var vizName = $('#viz-selector').find(":selected").text();
 
 
+<% include templates/style.ejs%>
+
+<body id="home_page">
+	<div>
+	    <% include templates/nav.ejs%>
+	</div>
+	
+	<div>
+    	<% include templates/home.ejs %>
+	</div>
 
 
-    </script>
-</head>
-
-
-<body>
-      <ul class="nav nav-tabs">
-         <li class="active"><a href="#Home" data-toggle="tab">Home</a></li>
-         <li><a href="#Visualization" data-toggle="tab">Visualization</a></li>
-         <li><a href="#Report" data-toggle="tab">Report</a></li>
-      </ul>
-
-      <!-- first tab: Home -->
-
-        <div class="tab-content">
-                 <div class="tab-pane fade in active" id="Home">
-
-                   <div class="col-xs-2">
-
-                   </div>
-
-                    <div class="col-xs-8">
-
-                        <h2 id="first_heading"> Welcome to our project website!</h2>
-                        <p id="first_p">
-                         Made by: D.D.K. Kregtich, Jakub Jerzy Chrupek, Jan Jacob Cozijnsen, Robin Daniël van Hoorn, Yeochan Yoon and Zakaria Ameziane
-                        </p>
-
-                        <hr>
-                        <h3 id="second_heading"> Visualize your Newick format files </h3>
-
-                        <p id="second_p">
-                        We have designed our own visualization program,  <br/>
-                        which is compatible for Newick tree format.
-                        </p>
-
-                        <hr/>
-                        <h3 id="third_heading">Introduction Video</h3>
-                        <br/>
-                        <iframe id="vid" src="https://www.youtube.com/embed/oRhfoX3kwAg" frameborder="0"  ></iframe>
-
-                    </div>
-
-                   <div class="col-xs-2">
-
-                   </div>
-
-                 </div>
-
-
-<!-- second tab: Visualization and upload -->
-                <div class="tab-pane fade" id="Visualization">
-                  <!-- put upload stuff -->
-                    <br/>
-                    <div class="row">
-                        <div class="col-xs-2">
-
-                        </div>
-
-                        <div class="col-xs-4">
-                            <div class="panel panel-default">
-
-                                <div class="panel-heading">
-                                  Upload Files
-                                </div>
-
-                                <div class="panel-body">
-                                    <!-- Includes the file uploader template -->
-                                    <% include templates/fileUpload.ejs %>
-                                </div>
-
-                            </div>
-                        </div>
-
-                        <div class="col-xs-4">
-                            <div class="panel panel-default">
-
-                                <div class="panel-heading">
-                                  Saved Files
-                                </div>
-
-                                <div class="panel-body">
-
-                                    <% include templates/selectingTrees.ejs %>
-
-                                </div>
-
-                            </div>
-                        </div>
-
-                        <div class="col-xs-2">
-
-                        </div>
-                    </div>
-
-                  <!-- put visualization stuff-->
-                    <div>
-                        <div class="col-xs-1">
-
-                        </div>
-
-                        <div class="col-xs-5">
-                            <div class="panel panel-success">
-                                <div class="panel-heading">
-                                Visualization 1
-                                </div>
-                                <!--Place for the sunburst visuzalization-->
-                                <div id="sunburstVisualDiv"></div>
-                                <div id='nodePath'></div>
-                            </div>
-                        </div>
-
-                        <div class="col-xs-5">
-                            <div class="panel panel-info">
-                                <div class="panel-heading">
-                                 Visualization 2
-                                </div>
-
-                                <div id="treeVisualDiv">
-                                    <svg width="800" height="500" id="treeVisual"></svg>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-xs-1">
-
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="tab-pane fade" id="Report">
-
-                    <div class="col-xs-2">
-
-                    </div>
-
-                    <div class="col-xs-8">
-                    <br/>
-                    <object id="pdf" data="midtermReport.pdf"></object>
-                    </div>
-
-                    <div class="col-xs-2">
-
-                    </div>
-                </div>
-
-
-        </div>
 </body>
 
-<script src="/javascripts/visual1.js"></script>
 
 </html>
