@@ -7,6 +7,14 @@
 var app = require('../app');
 var debug = require('debug')('webapp:server');
 var http = require('http');
+var checkDir = require('../modules/checkDirectory');
+
+
+/**
+ * Check if required directories exist, otherwise create them.
+ */
+
+checkDir.checkDirectory();
 
 /**
  * Get port from environment and store in Express.
