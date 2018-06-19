@@ -12,6 +12,7 @@ const team = require('./routes/team');
 const file_Upload = require('./routes/fileUpload');
 const visualization = require('./routes/visualization');
 const report = require('./routes/report');
+const deleteTree = require('./routes/deleteTree');
 
 const testing = require('./routes/testing');
 
@@ -39,6 +40,7 @@ app.use('/file_upload', file_Upload);
 app.use('/testing', testing);
 app.use('/visualization', visualization);
 app.use('/report', report);
+app.use('/deleteTree', deleteTree);
 
 
 
