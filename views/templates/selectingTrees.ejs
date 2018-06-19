@@ -1,7 +1,8 @@
-<select id="viz-selector">
-
-        <% trees.forEach(function(each){ %>
-            <option id="<%= each%>"><%=each%></option>
-      <%  });%>
-
-</select>
+<ul id="viz-selector">
+    <% trees.forEach(function(each){ %>
+    <li id="<%= each%>"><a class="btn btn-default"><%=each%></a>
+        <button type="button" class="btn btn-danger" id="<%=each + 'delete'%>" onclick="deleteRuquest">X</button>
+    </li>
+    <br/>
+    <%  });%>
+</ul>

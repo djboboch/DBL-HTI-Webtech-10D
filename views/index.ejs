@@ -4,16 +4,47 @@
 <% include templates/style.ejs%>
 
 <body id="home_page">
-	<div>
-	    <% include templates/nav.ejs%>
-	</div>
+<div>
+    <% include templates/nav.ejs %>
+</div>
 
-	<div>
-    	<% include templates/home.ejs %>
-	</div>
+<div id="Home">
+
+    <div class="col-xs-2">
+
+    </div>
+
+    <div class="col-xs-8">
+
+        <h2 id="first_heading"> Welcome to our project website!</h2>
+        <p id="first_p">
+            Made by: D.D.K. Kregtich, Jakub Jerzy Chrupek, Jan Jacob Cozijnsen, Robin Daniël van Hoorn, Yeochan Yoon and
+            Zakaria Ameziane
+        </p>
+
+        <hr>
+        <h3 id="second_heading"> Visualize your Newick format files </h3>
+
+        <p id="second_p">
+            We have designed our own visualization program,
+            which is compatible for Newick tree format.
+        </p>
+
+        <hr/>
+        <h3 id="third_heading">Introduction Video</h3>
+        <br/>
+        <iframe id="vid" src="https://www.youtube.com/embed/oRhfoX3kwAg" frameborder="0"></iframe>
+
+    </div>
+
+    <div class="col-xs-2">
+
+    </div>
+</div>
 
 
 </body>
 
+<script src="/javascripts/visual1.js"></script>
 
 </html>

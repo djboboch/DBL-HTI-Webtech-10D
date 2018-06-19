@@ -11,6 +11,7 @@ const indexRouter = require('./routes/index');
 const team = require('./routes/team');
 const file_Upload = require('./routes/fileUpload');
 const visualization = require('./routes/visualization');
+const report = require('./routes/report');
 
 const testing = require('./routes/testing');
 
@@ -37,6 +38,7 @@ app.use('/team', team);
 app.use('/file_upload', file_Upload);
 app.use('/testing', testing);
 app.use('/visualization', visualization);
+app.use('/report', report);
 
 
 
