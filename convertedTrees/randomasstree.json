@@ -1,0 +1,489 @@
+{ 
+"name": "",
+"nodeId": "1",
+"children": [{ 
+"name": "0.99985",
+"nodeId": "2",
+"children": [{ 
+"name": "6669.DappuP312785",
+"nodeId": "3", "size": 1000}, { 
+"name": "0.99985",
+"nodeId": "4",
+"children": [{ 
+"name": "0.998565",
+"nodeId": "5",
+"children": [{ 
+"name": "0.99985",
+"nodeId": "6",
+"children": [{ 
+"name": "7739.JGI126010",
+"nodeId": "7", "size": 1000}, { 
+"name": "7739.JGI126021",
+"nodeId": "8", "size": 1000}]
+}, { 
+"name": "0.888302",
+"nodeId": "9",
+"children": [{ 
+"name": "0.99985",
+"nodeId": "10",
+"children": [{ 
+"name": "45351.NEMVEDRAFT_v1g217973-PA",
+"nodeId": "11", "size": 1000}, { 
+"name": "0.457684",
+"nodeId": "12",
+"children": [{ 
+"name": "6085.XP_002167371",
+"nodeId": "13", "size": 1000}, { 
+"name": "10228.TriadP54105",
+"nodeId": "14", "size": 1000}]
+}]
+}, { 
+"name": "0.99985",
+"nodeId": "15",
+"children": [{ 
+"name": "7668.SPU_016633tr",
+"nodeId": "16", "size": 1000}, { 
+"name": "7668.SPU_013365tr",
+"nodeId": "17", "size": 1000}]
+}]
+}]
+}, { 
+"name": "0.760404",
+"nodeId": "18",
+"children": [{ 
+"name": "0.99985",
+"nodeId": "19",
+"children": [{ 
+"name": "51511.ENSCSAVP00000011400",
+"nodeId": "20", "size": 1000}, { 
+"name": "7719.ENSCINP00000035803",
+"nodeId": "21", "size": 1000}]
+}, { 
+"name": "0.99843",
+"nodeId": "22",
+"children": [{ 
+"name": "7757.ENSPMAP00000006833",
+"nodeId": "23", "size": 1000}, { 
+"name": "0.99985",
+"nodeId": "24",
+"children": [{ 
+"name": "0.99985",
+"nodeId": "25",
+"children": [{ 
+"name": "7955.ENSDARP00000103018",
+"nodeId": "26", "size": 1000}, { 
+"name": "0.99985",
+"nodeId": "27",
+"children": [{ 
+"name": "8049.ENSGMOP00000003903",
+"nodeId": "28", "size": 1000}, { 
+"name": "0.99985",
+"nodeId": "29",
+"children": [{ 
+"name": "0.99985",
+"nodeId": "30",
+"children": [{ 
+"name": "8128.ENSONIP00000009923",
+"nodeId": "31", "size": 1000}, { 
+"name": "0.750558",
+"nodeId": "32",
+"children": [{ 
+"name": "69293.ENSGACP00000005927",
+"nodeId": "33", "size": 1000}, { 
+"name": "0.99985",
+"nodeId": "34",
+"children": [{ 
+"name": "99883.ENSTNIP00000008530",
+"nodeId": "35", "size": 1000}, { 
+"name": "31033.ENSTRUP00000029741",
+"nodeId": "36", "size": 1000}]
+}]
+}]
+}, { 
+"name": "0.99985",
+"nodeId": "37",
+"children": [{ 
+"name": "8083.ENSXMAP00000007211",
+"nodeId": "38", "size": 1000}, { 
+"name": "8090.ENSORLP00000021771",
+"nodeId": "39", "size": 1000}]
+}]
+}]
+}]
+}, { 
+"name": "0.996306",
+"nodeId": "40",
+"children": [{ 
+"name": "7897.ENSLACP00000021045",
+"nodeId": "41", "size": 1000}, { 
+"name": "0.99985",
+"nodeId": "42",
+"children": [{ 
+"name": "8364.ENSXETP00000053091",
+"nodeId": "43", "size": 1000}, { 
+"name": "0.99985",
+"nodeId": "44",
+"children": [{ 
+"name": "0.99985",
+"nodeId": "45",
+"children": [{ 
+"name": "9258.ENSOANP00000015194",
+"nodeId": "46", "size": 1000}, { 
+"name": "0.99985",
+"nodeId": "47",
+"children": [{ 
+"name": "0.99985",
+"nodeId": "48",
+"children": [{ 
+"name": "13616.ENSMODP00000032296",
+"nodeId": "49", "size": 1000}, { 
+"name": "0.997706",
+"nodeId": "50",
+"children": [{ 
+"name": "9315.ENSMEUP00000005072",
+"nodeId": "51", "size": 1000}, { 
+"name": "9305.ENSSHAP00000018667",
+"nodeId": "52", "size": 1000}]
+}]
+}, { 
+"name": "0.99985",
+"nodeId": "53",
+"children": [{ 
+"name": "0.608183",
+"nodeId": "54",
+"children": [{ 
+"name": "9361.ENSDNOP00000011178",
+"nodeId": "55", "size": 1000}, { 
+"name": "0.99985",
+"nodeId": "56",
+"children": [{ 
+"name": "9371.ENSETEP00000005953",
+"nodeId": "57", "size": 1000}, { 
+"name": "0.99697",
+"nodeId": "58",
+"children": [{ 
+"name": "9813.ENSPCAP00000009886",
+"nodeId": "59", "size": 1000}, { 
+"name": "9785.ENSLAFP00000023898",
+"nodeId": "60", "size": 1000}]
+}]
+}]
+}, { 
+"name": "0.99985",
+"nodeId": "61",
+"children": [{ 
+"name": "0.99985",
+"nodeId": "62",
+"children": [{ 
+"name": "0.99985",
+"nodeId": "63",
+"children": [{ 
+"name": "0.99985",
+"nodeId": "64",
+"children": [{ 
+"name": "30608.ENSMICP00000006810",
+"nodeId": "65", "size": 1000}, { 
+"name": "30611.ENSOGAP00000013460",
+"nodeId": "66", "size": 1000}]
+}, { 
+"name": "0.993631",
+"nodeId": "67",
+"children": [{ 
+"name": "9478.ENSTSYP00000011163",
+"nodeId": "68", "size": 1000}, { 
+"name": "0.99985",
+"nodeId": "69",
+"children": [{ 
+"name": "9483.ENSCJAP00000037059",
+"nodeId": "70", "size": 1000}, { 
+"name": "0.99985",
+"nodeId": "71",
+"children": [{ 
+"name": "9544.ENSMMUP00000001688",
+"nodeId": "72", "size": 1000}, { 
+"name": "0.99985",
+"nodeId": "73",
+"children": [{ 
+"name": "61853.ENSNLEP00000001585",
+"nodeId": "74", "size": 1000}, { 
+"name": "0.99985",
+"nodeId": "75",
+"children": [{ 
+"name": "9601.ENSPPYP00000009641",
+"nodeId": "76", "size": 1000}, { 
+"name": "0.99985",
+"nodeId": "77",
+"children": [{ 
+"name": "9593.ENSGGOP00000014253",
+"nodeId": "78", "size": 1000}, { 
+"name": "0.993995",
+"nodeId": "79",
+"children": [{ 
+"name": "9606.ENSP00000299886",
+"nodeId": "80", "size": 1000}, { 
+"name": "9598.ENSPTRP00000016297",
+"nodeId": "81", "size": 1000}]
+}]
+}]
+}]
+}]
+}]
+}]
+}]
+}, { 
+"name": "0.99985",
+"nodeId": "82",
+"children": [{ 
+"name": "0.99985",
+"nodeId": "83",
+"children": [{ 
+"name": "0.995671",
+"nodeId": "84",
+"children": [{ 
+"name": "0.99985",
+"nodeId": "85",
+"children": [{ 
+"name": "10141.ENSCPOP00000018381",
+"nodeId": "86", "size": 1000}, { 
+"name": "10141.ENSCPOP00000003239",
+"nodeId": "87", "size": 1000}]
+}, { 
+"name": "0.99985",
+"nodeId": "88",
+"children": [{ 
+"name": "10090.ENSMUSP00000018805",
+"nodeId": "89", "size": 1000}, { 
+"name": "10116.ENSRNOP00000003804",
+"nodeId": "90", "size": 1000}]
+}]
+}, { 
+"name": "0.976029",
+"nodeId": "91",
+"children": [{ 
+"name": "43179.ENSSTOP00000001636",
+"nodeId": "92", "size": 1000}, { 
+"name": "10020.ENSDORP00000002346",
+"nodeId": "93", "size": 1000}]
+}]
+}, { 
+"name": "0.981559",
+"nodeId": "94",
+"children": [{ 
+"name": "9986.ENSOCUP00000010215",
+"nodeId": "95", "size": 1000}, { 
+"name": "37347.ENSTBEP00000010812",
+"nodeId": "96", "size": 1000}]
+}]
+}]
+}, { 
+"name": "0.99985",
+"nodeId": "97",
+"children": [{ 
+"name": "0.99985",
+"nodeId": "98",
+"children": [{ 
+"name": "9823.ENSSSCP00000018275",
+"nodeId": "99", "size": 1000}, { 
+"name": "0.99985",
+"nodeId": "100",
+"children": [{ 
+"name": "9739.ENSTTRP00000004916",
+"nodeId": "101", "size": 1000}, { 
+"name": "9913.ENSBTAP00000007999",
+"nodeId": "102", "size": 1000}]
+}]
+}, { 
+"name": "0.805512",
+"nodeId": "103",
+"children": [{ 
+"name": "0.99291",
+"nodeId": "104",
+"children": [{ 
+"name": "9796.ENSECAP00000006507",
+"nodeId": "105", "size": 1000}, { 
+"name": "0.99985",
+"nodeId": "106",
+"children": [{ 
+"name": "9685.ENSFCAP00000004377",
+"nodeId": "107", "size": 1000}, { 
+"name": "0.990824",
+"nodeId": "108",
+"children": [{ 
+"name": "9615.ENSCAFP00000006718",
+"nodeId": "109", "size": 1000}, { 
+"name": "0.979337",
+"nodeId": "110",
+"children": [{ 
+"name": "9646.ENSAMEP00000002816",
+"nodeId": "111", "size": 1000}, { 
+"name": "9669.ENSMPUP00000014182",
+"nodeId": "112", "size": 1000}]
+}]
+}]
+}]
+}, { 
+"name": "0.828177",
+"nodeId": "113",
+"children": [{ 
+"name": "59463.ENSMLUP00000015199",
+"nodeId": "114", "size": 1000}, { 
+"name": "132908.ENSPVAP00000006353",
+"nodeId": "115", "size": 1000}]
+}]
+}]
+}]
+}]
+}]
+}]
+}, { 
+"name": "0.99985",
+"nodeId": "116",
+"children": [{ 
+"name": "28377.ENSACAP00000014302",
+"nodeId": "117", "size": 1000}, { 
+"name": "0.912514",
+"nodeId": "118",
+"children": [{ 
+"name": "13735.ENSPSIP00000020553",
+"nodeId": "119", "size": 1000}, { 
+"name": "0.99985",
+"nodeId": "120",
+"children": [{ 
+"name": "59729.ENSTGUP00000002997",
+"nodeId": "121", "size": 1000}, { 
+"name": "0.99985",
+"nodeId": "122",
+"children": [{ 
+"name": "9103.ENSMGAP00000006649",
+"nodeId": "123", "size": 1000}, { 
+"name": "9031.ENSGALP00000007041",
+"nodeId": "124", "size": 1000}]
+}]
+}]
+}]
+}]
+}]
+}]
+}]
+}]
+}]
+}]
+}]
+}, { 
+"name": "0.99985",
+"nodeId": "125",
+"children": [{ 
+"name": "0.868488",
+"nodeId": "126",
+"children": [{ 
+"name": "7070.TC009561-PA",
+"nodeId": "127", "size": 1000}, { 
+"name": "0.630765",
+"nodeId": "128",
+"children": [{ 
+"name": "7029.ACYPI001869-PA",
+"nodeId": "129", "size": 1000}, { 
+"name": "0.950323",
+"nodeId": "130",
+"children": [{ 
+"name": "0.99985",
+"nodeId": "131",
+"children": [{ 
+"name": "34740.HMEL012959-PA",
+"nodeId": "132", "size": 1000}, { 
+"name": "0.691542",
+"nodeId": "133",
+"children": [{ 
+"name": "13037.EHJ66433",
+"nodeId": "134", "size": 1000}, { 
+"name": "7091.BGIBMGA012450-TA",
+"nodeId": "135", "size": 1000}]
+}]
+}, { 
+"name": "0.99985",
+"nodeId": "136",
+"children": [{ 
+"name": "7425.NV10250-PA",
+"nodeId": "137", "size": 1000}, { 
+"name": "0.99985",
+"nodeId": "138",
+"children": [{ 
+"name": "7460.GB18353-PA",
+"nodeId": "139", "size": 1000}, { 
+"name": "12957.ACEP_00009457-PA",
+"nodeId": "140", "size": 1000}]
+}]
+}]
+}]
+}]
+}, { 
+"name": "0.628915",
+"nodeId": "141",
+"children": [{ 
+"name": "121225.PHUM413450-PA",
+"nodeId": "142", "size": 1000}, { 
+"name": "0.99985",
+"nodeId": "143",
+"children": [{ 
+"name": "0.99985",
+"nodeId": "144",
+"children": [{ 
+"name": "0.99985",
+"nodeId": "145",
+"children": [{ 
+"name": "43151.ADAR004533-PA",
+"nodeId": "146", "size": 1000}, { 
+"name": "7165.AGAP001322-PA",
+"nodeId": "147", "size": 1000}]
+}, { 
+"name": "0.99985",
+"nodeId": "148",
+"children": [{ 
+"name": "7176.CPIJ007948-PA",
+"nodeId": "149", "size": 1000}, { 
+"name": "7159.AAEL007141-PA",
+"nodeId": "150", "size": 1000}]
+}]
+}, { 
+"name": "0.99985",
+"nodeId": "151",
+"children": [{ 
+"name": "7260.FBpp0240708",
+"nodeId": "152", "size": 1000}, { 
+"name": "0.825983",
+"nodeId": "153",
+"children": [{ 
+"name": "0.99985",
+"nodeId": "154",
+"children": [{ 
+"name": "7222.FBpp0149372",
+"nodeId": "155", "size": 1000}, { 
+"name": "7244.FBpp0224481",
+"nodeId": "156", "size": 1000}]
+}, { 
+"name": "0.99985",
+"nodeId": "157",
+"children": [{ 
+"name": "7237.FBpp0281462",
+"nodeId": "158", "size": 1000}, { 
+"name": "0.99985",
+"nodeId": "159",
+"children": [{ 
+"name": "7217.FBpp0120932",
+"nodeId": "160", "size": 1000}, { 
+"name": "0.99985",
+"nodeId": "161",
+"children": [{ 
+"name": "7245.FBpp0269552",
+"nodeId": "162", "size": 1000}, { 
+"name": "7227.FBpp0082093",
+"nodeId": "163", "size": 1000}]
+}]
+}]
+}]
+}]
+}]
+}]
+}]
+}]
+}

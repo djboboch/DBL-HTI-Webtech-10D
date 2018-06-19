@@ -5,7 +5,7 @@ var router = express.Router();
 var fileUpload = require('express-fileupload');
 var convToJSON = require('../modules/convertToJson');
 var fs = require('fs');
-
+var getT = require('../modules/getTrees');
 
 router.use(fileUpload());
 
@@ -40,7 +40,10 @@ router.post('/', function (req, res, next) {
 
     },5000);
 
-    res.redirect('./');
+
+    getT.addTrees();
+    res.redirect('/');
+
 
 });
 
