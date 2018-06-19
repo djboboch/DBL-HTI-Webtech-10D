@@ -21,7 +21,7 @@ router.get('/', function (req, res, next) {
     });
 
     getT.clearTrees();
-    res.end();
+    //res.end();
 
 });
 

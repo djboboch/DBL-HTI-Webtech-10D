@@ -1,23 +1,120 @@
 <!DOCTYPE html>
 
 
-<% include templates/style.ejs%>
+<% include templates/style.ejs %>
 
 <body id="visual_page">
 
-	<div> 
-		<% include templates/nav.ejs%>
-	</div>
-	  
-	<div>
-		<% include templates/visual.ejs %> 
-	</div>
+<div>
+    <% include templates/nav.ejs %>
+</div>
 
-	<div>
-		<% include templates/popup.ejs %>
-	</div>
+<br/>
+<div class="row">
+    <div class="col-xs-2">
 
+    </div>
 
+    <div class="col-xs-4">
+        <div class="panel panel-default">
+
+            <div class="panel-heading">
+                Upload Files
+            </div>
+
+            <div class="panel-body">
+                <% include templates/fileUpload.ejs %>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="col-xs-4">
+        <div class="panel panel-default">
+
+            <div class="panel-heading">
+                Saved Files
+            </div>
+
+            <div class="panel-body">
+
+                <% include templates/selectingTrees.ejs %>
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="col-xs-2">
+
+    </div>
+</div>
+
+<!-- put visualization stuff-->
+<div class="col-xs-1">
+
+</div>
+
+<!-- Popup page contains visualization -->
+<div class="col-xs-10">
+
+    <div id="visual_pop">
+        <div class="modal" id="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <p id="modalheader">Visualizations</p>
+                    <span class="close" id="close">x</span>
+                </div>
+
+                <div class="modal-body" id="modal_body">
+
+                    <div class="col-xs-6">
+                        <div class="panel panel-success">
+                            <div class="panel-heading">
+                                Visualization 1
+                            </div>
+
+                            <div class="panel-body">
+                                show vis 1
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-6">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                Visualization 2
+                            </div>
+
+                            <div class="panel-body">
+                                show vis 2
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="col-xs-1">
+
+</div>
+
+<div>
+    <div class="modal" id="explain_pop">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close" id="close_1">x</span>
+                <p> this is the explanation supposed to be shown only once.
+                    Explain the data visualization here </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="javascripts/popup.js"></script>
 <script src="/javascripts/deleteRequest.js"></script>
 </body>
 
