@@ -626,12 +626,3 @@ function collapseNode(f) {
     }
     update(f);
 }
-
-
-// function moveSvg(x, y) {
-//     d3v4.select('.content')
-//         .attr("cx", d.x = x)
-//         .attr("cy", d.y = y);
-// }
-//
-// moveSvg(100,100);
