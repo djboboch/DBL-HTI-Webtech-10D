@@ -1,8 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-
-
+router.use('/visualization', express.static(__dirname + '/convertedTrees'));
 
 var getT = require('../modules/getTrees');
 
@@ -16,7 +15,7 @@ router.use(function (req, res, next) {
 router.get('/', function (req, res, next) {
 
 
-    res.render('visual', {
+    res.render('selectScreen', {
         trees: getT.getTrees()
     });
 
@@ -27,7 +26,7 @@ router.get('/', function (req, res, next) {
 
 router.get('/:name', function(req,res,next){
 
-    res.render('testing',{
+    res.render('visualPage',{
         treeName: req.params.name
     });
     //res.end();

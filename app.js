@@ -14,8 +14,6 @@ const visualization = require('./routes/visualization');
 const report = require('./routes/report');
 const deleteTree = require('./routes/deleteTree');
 
-const testing = require('./routes/testing');
-
 var app = express();
 
 // view engine setup
@@ -37,7 +35,6 @@ app.use(express.static(path.join(__dirname, 'lib')));
 app.use('/', indexRouter);
 app.use('/team', team);
 app.use('/file_upload', file_Upload);
-app.use('/testing', testing);
 app.use('/visualization', visualization);
 app.use('/report', report);
 app.use('/deleteTree', deleteTree);

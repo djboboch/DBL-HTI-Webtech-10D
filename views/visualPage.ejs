@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+
+
+<% include templates/style.ejs %>
+
+<script src="/d3v3.js"></script>
+<script src="/d3v4.js"></script>
+<link rel="stylesheet" href="/stylesheets/visStyle.css">
+
+<body id="home_page">
+<div>
+    <% include templates/nav.ejs %>
+</div>
+<div>
+    <% include templates/visualizations.ejs %>
+
+</div>
+<!--Hidden Variable for the visul1 script to pick up the name of the tree to visualize-->
+<div id="treeName" style="opacity: 0"><%=treeName%></div>
+</body>
+
+<script src="/javascripts/visual1.js"></script>
+<script src="/javascripts/visRequest.js"></script>
+
+</html>

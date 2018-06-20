@@ -1,4 +1,8 @@
-var treePath = "randomasstree.json";
+
+var treename = document.getElementById('treeName').textContent;
+
+
+var treePath = "../" + treename + ".json";
 
 // Constants
 const marginSunburst = {top: 200, right: 100, bottom: 200, left: 100},
