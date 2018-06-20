@@ -14,7 +14,7 @@ const marginSunburst = {top: 200, right: 100, bottom: 200, left: 100},
         .append("g")
         .attr("transform", "translate(" + 250 + "," + marginSunburst.top + ")"),
 
-    partition = d3.layout.partition()
+        partition = d3.layout.partition()
         .sort(function (f, g) {
             return d3v4.ascending(f.name, g.name);
         })
@@ -626,12 +626,3 @@ function collapseNode(f) {
     }
     update(f);
 }
-
-
-// function moveSvg(x, y) {
-//     d3v4.select('.content')
-//         .attr("cx", d.x = x)
-//         .attr("cy", d.y = y);
-// }
-//
-// moveSvg(100,100);
