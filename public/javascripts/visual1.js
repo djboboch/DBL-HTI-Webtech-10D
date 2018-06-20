@@ -1,5 +1,5 @@
 
-var treePath = 'treeconverted.json';
+var treePath = 'randomasstree.json';
 
 // Constants
 const marginSunburst = {top: 200, right: 100, bottom: 200, left: 100},
@@ -14,7 +14,7 @@ const marginSunburst = {top: 200, right: 100, bottom: 200, left: 100},
         .append("g")
         .attr("transform", "translate(" + 250 + "," + marginSunburst.top + ")"),
 
-    partition = d3.layout.partition()
+        partition = d3.layout.partition()
         .sort(function (f, g) {
             return d3v4.ascending(f.name, g.name);
         })
