@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+
+
+<% include templates/style.ejs %>
+
+<link rel="stylesheet" href="stylesheets/visStyle.css">
+<body id="visual_page">
+
+<div>
+    <% include templates/nav.ejs %>
+</div>
+
+<br/>
+<div class="row">
+    <div class="col-xs-2">
+
+    </div>
+
+    <div class="col-xs-4">
+        <div class="panel panel-default">
+
+            <div class="panel-heading">
+                Upload Files
+            </div>
+
+            <div class="panel-body">
+                <% include templates/fileUpload.ejs %>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="col-xs-4">
+        <div class="panel panel-default">
+
+            <div class="panel-heading">
+                Saved Files
+            </div>
+
+
+            <div class="panel-body">
+
+                <% include templates/selectingTrees.ejs %>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+    <script src="/javascripts/deleteRequest.js"></script>
+    <script src="/javascripts/visRequest.js"></script>
+</body>
+
+
+</html>
