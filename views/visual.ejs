@@ -6,6 +6,7 @@
 <script src="d3v3.js"></script>
 <script src="d3v4.js"></script>
 <link rel="stylesheet" href="stylesheets/visStyle.css">
+<link rel="stylesheet" href="stylesheets/styleAll.css">
 <body id="visual_page">
 
 <div>
@@ -39,7 +40,7 @@
                 Saved Files
             </div>
 
-            <div class="panel-body">
+            <div class="panel-body" id="file_select">
 
                 <% include templates/selectingTrees.ejs %>
 
@@ -71,6 +72,7 @@
 
                 <div class="modal-body" id="modal_body">
 
+
                     <div class="col-xs-6">
                         <div class="panel panel-success">
                             <div class="panel-heading">
@@ -97,6 +99,18 @@
                         </div>
                     </div>
 
+                <div>
+                    <div class="modal" id="explain_pop">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <span class="close" id="close_1">x</span>
+                                <p> this is the explanation supposed to be shown only once.
+                                    Explain the data visualization here </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 </div>
             </div>
         </div>
@@ -107,17 +121,7 @@
 
 </div>
 
-<div>
-    <div class="modal" id="explain_pop">
-        <div class="modal-content">
-            <div class="modal-header">
-                <span class="close" id="close_1">x</span>
-                <p> this is the explanation supposed to be shown only once.
-                    Explain the data visualization here </p>
-            </div>
-        </div>
-    </div>
-</div>
+
 
 <script src="/javascripts/popup.js"></script>
 <script src="/javascripts/deleteRequest.js"></script>

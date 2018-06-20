@@ -3,9 +3,38 @@
 body{
     font-family: 'Georgia';
 }
+head {
+    font-family: Arial, Helvetica, sans-serif;
+}
 li{
     list-style-type: none;
 }
+
+#intro{
+    margin: 0;
+    padding: 400px;
+    text-align: right;
+    background:url(Home-Page-Background-II.jpg);
+    background-size: cover;
+    background-position: center;
+    font-family: 'sans-serif';
+}
+
+#intro_heading {
+    margin-top: -100px;
+    color: aliceblue;
+    font-family:'Georgia';
+}
+.HomeButton{
+    background: aliceblue;
+    color: black;
+    border: none;
+    height: 40px;
+    width: 150px;
+    cursor: pointer;
+        
+}
+
 #first_p {
     font-size: 0.8em;
 }
@@ -60,17 +89,12 @@ li{
 #explain_pop {
     position: absolute;
     width: 300px;
-    top: 50%;
     left: 50%;
     margin-left: -150px;
     margin-top: 150px;
 }
 
-/*    #home_page, #visual_page, #report_page, #team_page {
-        background: linear-gradient(rgba(0,0,0,0),rgba(0,0,0,0.0)),url(https://wyo-opto.com/wp-content/uploads/2016/01/minimal-gray-to-white-gradient-wallpapers.jpg);
-        background-size: cover;
-        background-position: center;
-    }*/
+
 
     
 

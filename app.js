@@ -7,6 +7,7 @@ var logger = require('morgan');
 
 
 //Variables linking to the routes
+const introduction = require('./routes/intro');
 const indexRouter = require('./routes/index');
 const team = require('./routes/team');
 const file_Upload = require('./routes/fileUpload');
@@ -34,7 +35,8 @@ app.use(express.static(path.join(__dirname, 'lib')));
 
 
 //Routing defining
-app.use('/', indexRouter);
+app.use('/', introduction);
+app.use('/intro', indexRouter);
 app.use('/team', team);
 app.use('/file_upload', file_Upload);
 app.use('/testing', testing);
