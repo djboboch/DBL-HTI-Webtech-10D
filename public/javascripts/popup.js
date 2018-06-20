@@ -1,5 +1,5 @@
 var mod = document.getElementById("modal");
-var btn = document.getElementById("randomasstreeselector");
+var btn = document.getElementById("randomasstree");
 var up = document.getElementById("upload-file");
 var spn = document.getElementById("close");
 

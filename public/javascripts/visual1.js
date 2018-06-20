@@ -1,5 +1,4 @@
-
-var treePath = 'randomasstree.json';
+var treePath = "randomasstree.json";
 
 // Constants
 const marginSunburst = {top: 200, right: 100, bottom: 200, left: 100},

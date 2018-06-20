@@ -44,9 +44,16 @@ li{
 }
 
 #modal {
-    position: absolute;
-    height: 600px;
-    top: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    height: 70%;
+    width: 90%;
+    top: 100px;
+    display: block;
+
+}
+#modal_body{
+    height: 75%;
 }
 
 #modalheader {

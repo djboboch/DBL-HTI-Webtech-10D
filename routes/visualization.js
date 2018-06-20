@@ -21,6 +21,15 @@ router.get('/', function (req, res, next) {
     });
 
     getT.clearTrees();
+    res.end();
+
+});
+
+router.get('/:name', function(req,res,next){
+
+    res.render('testing',{
+        treeName: req.params.name
+    });
     //res.end();
 
 });
