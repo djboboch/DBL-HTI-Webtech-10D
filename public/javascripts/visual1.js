@@ -15,7 +15,7 @@ const marginSunburst = {top: 200, right: 100, bottom: 200, left: 100},
         .attr("width", '100%')
         .attr("height", '400px')
         .append("g")
-        .attr("transform", "translate(" + 250 + "," + marginSunburst.top + ")"),
+        .style('transform', 'translate(50%, 50%)'),
 
         partition = d3.layout.partition()
         .sort(function (f, g) {
@@ -293,7 +293,7 @@ const treeSvg = d3v4.select("#treeVisual"),
 var i = 0,
     treeRoot,
     tree = d3v4.tree()
-        .nodeSize([heightTree/3, widthTree * 3])
+        .nodeSize([heightTree/5, widthTree/3])
         .separation(function(a, b) {
             return a.parent == b.parent ? 1 : 1;
         });
