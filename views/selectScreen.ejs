@@ -65,6 +65,16 @@
                </div>
 
                <div class="panel-body">
+                    <p id="generalExplanation">Your Newick file will be visualized in two different ways.
+                       The first visualization is a sunburst visualization, which shows the current selected node, its children and its grandchildren.
+                       The size of the nodes is determined by the number of nodes in its subtree.
+                       If a node is too small compared to its ‘nephews’, it won’t show up in the sunburst.
+                       Fortunately, it will show up in the second visualization. <br/>
+                       The second visualization is a collapsible tree visualization.
+                       This visualization shows node names and position.
+                       The purpose of this visual is to give detail.
+                   </p>
+
                    <p id="description1"> The sunburst visualization has both hover and click interaction.</p>
                    <p id="detail_1">-   When hovering over the sunburst visualization it highlights the node and all its ancestors by fading out all nodes except itself and its ancestors.<br/>
                     -   When clicking on a node in the sunburst visualization the sunburst zooms in on that node. <br/>
@@ -78,6 +88,10 @@
                     o   Clicking on a node in the tree visualization, that is currently not visible in the sunburst visualization will still zoom the sunburst visualization to that node.<br/>
                     When hovering any node it, it will show all names of ancestor nodes underneath the visualizations. This represents the node path with names in case this isn’t visible anymore in the normal visualizations.
                 </p>
+
+                   <p><b>Note:</b> Extensively large datasets may require some time to load.<br/>
+                       <b>Note 2:</b> The tree visualization will initially appear in the middle of the screen. However, when trying to drag for the first time it will move to the left top center. This is a knows bug, which right now can't be fixed because of the source code of d3 (one of the libraries used for making this tool).
+                   </p>
                </div> 
             </div>
         </div>
