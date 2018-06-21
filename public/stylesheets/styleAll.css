@@ -1,5 +1,28 @@
 
 
+#intro{
+    margin: 0;
+    padding: 400px;
+    text-align: right;
+    background:url("../photos/Home-Page-Background-II.jpg");
+    background-size: cover;
+    background-position: center;
+    font-family: sans-serif;
+}
+#intro_heading {
+    margin-top: -100px;
+    color: aliceblue;
+    font-family:'Georgia';
+}
+.HomeButton{
+    background: aliceblue;
+    color: black;
+    border: none;
+    height: 40px;
+    width: 150px;
+    cursor: pointer;
+
+}
 body{
     font-family: 'Georgia';
 }
@@ -26,6 +49,37 @@ li{
 
 .nav {
     background-color: #e5fff6;
+}
+
+#description1 {
+    margin-top:1px;
+    margin-bottom:1px;
+    line-height:25px;
+    font-weight: bolder;
+}
+#detail_1 {
+    font-family: Arial
+}
+#description2 {
+    margin-top:1px;
+    margin-bottom:1px;
+    line-height:25px;
+    font-weight: bolder;
+
+}
+#detail_2 {
+    font-family: Arial
+
+}
+#description3 {
+    margin-top:1px;
+    margin-bottom:1px;
+    line-height:25px;
+    font-weight: bolder;
+
+}
+#detail_3 {
+    font-family: Arial
 }
 
 #pdf {
@@ -73,11 +127,10 @@ li{
     margin-top: 150px;
 }
 
-/*    #home_page, #visual_page, #report_page, #team_page {
-        background: linear-gradient(rgba(0,0,0,0),rgba(0,0,0,0.0)),url(https://wyo-opto.com/wp-content/uploads/2016/01/minimal-gray-to-white-gradient-wallpapers.jpg);
-        background-size: cover;
-        background-position: center;
-    }*/
+#nav_heading {
+    font-family: Arial;
+    font-weight: bold;
+}
 
     
 
