@@ -11,6 +11,7 @@
 </div>
 
 <br/>
+
 <div class="row">
     <div class="col-xs-2">
 
@@ -38,7 +39,7 @@
             </div>
 
 
-            <div class="panel-body">
+            <div class="panel-body" id="file_select">
 
                 <% include templates/selectingTrees.ejs %>
 
@@ -46,6 +47,44 @@
 
         </div>
     </div>
+
+    <div class="col-xs-2">
+
+    </div>
+</div>
+
+    <div class="row">
+       
+    <div class="col-xs-2">
+
+    </div>
+        <div class="col-xs-8">
+            <div class="panel panel-primary">
+               <div class="panel-heading">
+               Interaction
+               </div>
+
+               <div class="panel-body">
+                   <p id="description1"> The sunburst visualization has both hover and click interaction.</p>
+                   <p id="detail_1">-   When hovering over the sunburst visualization it highlights the node and all its ancestors by fading out all nodes except itself and its ancestors.<br/>
+                    -   When clicking on a node in the sunburst visualization the sunburst zooms in on that node. <br/>
+                    -   Clicking on the center of the sunburst visualization makes the sunburst visual zoom out one generation.<br/><p>
+                   <p id="description2"> The tree visualization also has hover and click interaction.<br/></p>
+                   <p id="detail_2"> -   When hovering over a node in the tree visualization, it highlights all its ancestors by fading out all connections between nodes except the paths between the root and the node that is hovered over.<br/>
+                    -   When clicking on a collapsed (pink) node, the node unfolds and shows all its children. If one of those children was previously unfolded – and not collapsed again – it will still be unfolded.<br/>
+                    -   When clicking on an unfolded (white) node (except the root), the node will collapse. After collapsing, the node will not show any descendants.<br/>
+                    <p id="description3">   Next to their own interactions, the visualizations also interact with each other.</p>
+                  <p id="detail_3">  -   When hovering/clicking the sunburst visualization, the same node will be hovered/clicked in the tree visualization.<br/>
+                    o   Clicking on a node in the tree visualization, that is currently not visible in the sunburst visualization will still zoom the sunburst visualization to that node.<br/>
+                    When hovering any node it, it will show all names of ancestor nodes underneath the visualizations. This represents the node path with names in case this isn’t visible anymore in the normal visualizations.
+                </p>
+               </div> 
+            </div>
+        </div>
+
+        
+    </div>
+
 </div>
 
     <script src="/javascripts/deleteRequest.js"></script>
