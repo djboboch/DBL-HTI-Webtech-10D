@@ -10,8 +10,6 @@ circle {
 
 #nodePath {
     font-size: 1em;
-    position: absolute;
-    bottom: 0;
 }
 
 .node {

@@ -106,16 +106,13 @@ li{
     display: block;
 
 }
-#modal_body{
-    height: 75%;
-}
 
 #modalheader {
     font-size: 0.8em;
 }
 
 #modal_body {
-    height: 500px;
+    height: -webkit-fill-available;
 }
 
 #explain_pop {
