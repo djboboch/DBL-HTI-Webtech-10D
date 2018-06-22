@@ -42,7 +42,7 @@ router.post('/', function (req, res, next) {
 
 
     getT.addTrees();
-    res.redirect('/');
+    res.redirect('/visualization');
 
 
 });
