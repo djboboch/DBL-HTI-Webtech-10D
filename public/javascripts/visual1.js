@@ -358,14 +358,18 @@ function update(treeSource) {
             return "translate(" + treeSource.x0 + "," + treeSource.x0 + ")";
         })
         .on('click', function(f) {
-            if(f.data.children) {
-                clickTree(f);
-                if(getTreeObject(d3.select('.sunburstPath')[0][0].__data__).depth < f.depth) {
-                    zoom(getSunburstObject(f), getSunburstObject(f));
+            if(f.parent) {
+                if (f.data.children) {
+                    clickTree(f);
+                    if (getTreeObject(d3.select('.sunburstPath')[0][0].__data__).depth < f.depth) {
+                        zoom(getSunburstObject(f), getSunburstObject(f));
+                    } else {
+                        zoomOut(getSunburstObject(f));
+                    }
                 } else {
-                    zoomOut(getSunburstObject(f));
+                    null
                 }
-            } else {null}
+            }
         })
         .on('mouseover', function(f) {
             mouseoverTree(f);

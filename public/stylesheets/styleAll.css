@@ -3,6 +3,7 @@
 #intro{
     margin: 0;
     padding: 400px;
+    height: 95vh;
     text-align: right;
     background:url("../photos/Home-Page-Background-II.jpg");
     background-size: cover;
