@@ -1,20 +1,39 @@
-
-
 #intro{
-    margin: 0;
-    padding: 400px;
-    height: 95vh;
-    text-align: right;
-    background:url("../photos/Home-Page-Background-II.jpg");
+    background-image: url("../photos/Home-Page-Background-II.jpg");
+    position: fixed;
+    display: table;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     background-size: cover;
-    background-position: center;
-    font-family: sans-serif;
+    background-position: center center;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    will-change: transform;
+    z-index: -1;
+    padding: 50px;
 }
-#intro_heading {
-    margin-top: -100px;
+.landing-text {
+
+    z-index: 100;
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
     color: aliceblue;
     font-family:'Georgia';
 }
+.landing-text h1{
+
+    font-size: 400%;
+    font-weight: 700;
+}
+.landing-text h3{
+
+    font-size: 250%;
+    font-weight: 700;
+}
+
 .HomeButton{
     background: aliceblue;
     color: black;
@@ -30,15 +49,6 @@ body{
 li{
     list-style-type: none;
 }
-#first_p {
-    font-size: 0.8em;
-}
-
-
-#second_p {
-    font-size: 0.8em
-}
-
 
 #vid {
     height: 400px;
@@ -85,10 +95,7 @@ li{
 
 #pdf {
     height: 750px;
-    width: 800px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+    width: 100%;
 
 }
 
@@ -99,12 +106,11 @@ li{
 }
 
 #modal {
-    margin-left: auto;
-    margin-right: auto;
-    height: 70%;
-    width: 90%;
-    top: 100px;
-    display: block;
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    left: 10%;
+    padding: 1vh;
 
 }
 
