@@ -89,13 +89,13 @@ d3.json(treePath, function (error, data) {
     pathSunburst = sunburstSvg.selectAll(".sunburstPath")
         .data(partition.nodes(sunburstRoot).slice(1))
         .enter().append("path")
-        .attr("class", 'sunburstPath')
         .attr("d", arc)
-        .style("fill", function (f) {
-            return f.fill;
-        })
+        .attr("class", 'sunburstPath')
         .each(function (f) {
             this._current = updateArc(f);
+        })
+        .style("fill", function (f) {
+            return f.fill;
         })
         .on("click", function(f) {
             if(f.depth == 2) {
@@ -114,12 +114,7 @@ d3.json(treePath, function (error, data) {
         });
 });
 
-// Assign zoom functions
-function zoomIn(f) {
-    if (!f.children) return;
-    zoom(f, f);
-}
-
+// Assign zoomout functions
 function zoomOut(p) {
     if (!p.parent) return;
     zoom(p.parent, p);
@@ -130,31 +125,31 @@ function zoom(root, p) {
     if (document.documentElement.__transition__) return;
 
     // Resize outside angles
-    var enterArc,
-        exitArc,
-        outsideAngle = d3v4.scaleLinear().domain([0, circleRadians]);
+    var inArc,
+        outArc,
+        outerAngle = d3v4.scaleLinear().domain([0, circleRadians]);
 
-    function insideArc(f) {
+    function outerArc(d) {
+        return {depth: d.depth + 1, x: outerAngle(d.x), dx: outerAngle(d.x + d.dx) - outerAngle(d.x)};
+    }
+
+    function innerArc(f) {
         return p.key > f.key
             ? {depth: f.depth - 1, x: 0, dx: 0} : p.key < f.key
                 ? {depth: f.depth - 1, x: circleRadians, dx: 0}
                 : {depth: 0, x: 0, dx: circleRadians};
     }
 
-    function outsideArc(d) {
-        return {depth: d.depth + 1, x: outsideAngle(d.x), dx: outsideAngle(d.x + d.dx) - outsideAngle(d.x)};
-    }
-
     centerSunburst.datum(root);
 
     // Transistion stuff
-    if (root === p) enterArc = outsideArc, exitArc = insideArc, outsideAngle.range([p.x, p.x + p.dx]);
+    if (root === p) outArc = innerArc, inArc = outerArc, outerAngle.range([p.x, p.x + p.dx]);
 
     pathSunburst = pathSunburst.data(partition.nodes(root).slice(1), function (d) {
         return d.key;
     });
 
-    if (root !== p) enterArc = insideArc, exitArc = outsideArc, outsideAngle.range([p.x, p.x + p.dx]);
+    if (root !== p) inArc = innerArc, outArc = outerArc, outerAngle.range([p.x, p.x + p.dx]);
 
     d3.transition().duration(750).each(function () {
         pathSunburst.exit().transition()
@@ -162,7 +157,7 @@ function zoom(root, p) {
                 return f.depth === 1 + (root === p) ? 1 : 0;
             })
             .attrTween("d", function (f) {
-                return arcTween.call(this, exitArc(f));
+                return arcTrans.call(this, outArc(f));
             })
             .remove();
 
@@ -187,17 +182,16 @@ function zoom(root, p) {
             })
             .on("mouseover", function(f) {
                 mouseoverSunburst(f);
-                //console.log(f);
                 mouseoverTree(getTreeObject(f));
             })
             .each(function (f) {
-                this._current = enterArc(f);
+                this._current = inArc(f);
             });
 
         pathSunburst.transition()
             .style("fill-opacity", 1)
             .attrTween("d", function (f) {
-                return arcTween.call(this, updateArc(f));
+                return arcTrans.call(this, updateArc(f));
             });
     });
     mouseoverTree(p);
@@ -205,7 +199,6 @@ function zoom(root, p) {
 
 // Hover function
 function mouseoverSunburst(f) {
-    //mouseoverTree(getTreeObject(f));
     d3.selectAll(".sunburstPath")
         .style("opacity", 0.3);
 
@@ -246,7 +239,6 @@ function mouseoverSunburst(f) {
             })
             .style('margin', '3px')
             .style('padding', '3px')
-            //.style('float', 'right')
             .text(function (d) {
                 return f.name;
             })
@@ -261,7 +253,7 @@ function key(f) {
     return k.reverse().join(".");
 }
 
-function arcTween(f) {
+function arcTrans(f) {
     var i = d3.interpolate(this._current, f);
     this._current = i(0);
     return function (t) {
@@ -352,7 +344,7 @@ function update(treeSource) {
         });
 
     // New nodes
-    var nodeEnter = node.enter().append('g')
+    var nodeIn = node.enter().append('g')
         .attr('class', 'node')
         .attr("transform", function (f) {
             return "translate(" + treeSource.x0 + "," + treeSource.x0 + ")";
@@ -377,7 +369,7 @@ function update(treeSource) {
         });
 
     // Add circles
-    nodeEnter.append('circle')
+    nodeIn.append('circle')
         .attr('class', 'node')
         .attr('r', 1e-6)
         .style("fill", function (f) {
@@ -385,7 +377,7 @@ function update(treeSource) {
         });
 
     // Labels
-    nodeEnter.append('text')
+    nodeIn.append('text')
         .attr("dy", ".35em")
         .attr("x", function (f) {
             return f.children || f._children ? -13 : 13;
@@ -398,17 +390,17 @@ function update(treeSource) {
         });
 
     // Update
-    var nodeUpdate = nodeEnter.merge(node);
+    var nodeTransUpdate = nodeIn.merge(node);
 
     // Transition
-    nodeUpdate.transition()
+    nodeTransUpdate.transition()
         .duration(transitionTree)
         .attr("transform", function (f) {
             return "translate(" + f.y + "," + f.x + ")";
         });
 
     // Update
-    nodeUpdate.select('circle.node')
+    nodeTransUpdate.select('circle.node')
         .attr('r', 10)
         .style("fill", function (f) {
             return f._children ? "#ffc0ab" : "#fff";
@@ -417,18 +409,18 @@ function update(treeSource) {
 
 
     // Remove
-    var nodeExit = node.exit().transition()
+    var nodeOut = node.exit().transition()
         .duration(transitionTree)
         .attr("transform", function (f) {
             return "translate(" + treeSource.x + "," + treeSource.x + ")";
         })
         .remove();
 
-    nodeExit.select('circle')
+    nodeOut.select('circle')
         .attr('r', 1e-6);
 
     // Fade out
-    nodeExit.select('text')
+    nodeOut.select('text')
         .style('fill-opacity', 1e-6);
 
     // Links
@@ -441,7 +433,7 @@ function update(treeSource) {
 
 
     // New links
-    var linkEnter = link.enter().insert('path', "g")
+    var linkIn = link.enter().insert('path', "g")
         .attr("class", "link")
         .attr('d', function (f) {
             var o = {x: treeSource.x0, y: treeSource.y0}
@@ -449,17 +441,17 @@ function update(treeSource) {
         });
 
     // Update
-    var linkUpdate = linkEnter.merge(link);
+    var linkTransUpdate = linkIn.merge(link);
 
     // Transition
-    linkUpdate.transition()
+    linkTransUpdate.transition()
         .duration(transitionTree)
         .attr('d', function (f) {
             return diagonal(f, f.parent)
         });
 
     // Remove
-    var linkExit = link.exit().transition()
+    var linkOut = link.exit().transition()
         .duration(transitionTree)
         .attr('d', function (f) {
             var o = {x: treeSource.x, y: treeSource.y}
