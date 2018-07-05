@@ -17,7 +17,7 @@ const marginSunburst = {top: 200, right: 100, bottom: 200, left: 100},
         .append("g")
         .style('transform', 'translate(50%, 50%)'),
 
-        partition = d3.layout.partition()
+    partition = d3.layout.partition()
         .sort(function (f, g) {
             return d3v4.ascending(f.name, g.name);
         })
@@ -502,17 +502,6 @@ function mouseoverTree(f) {
 
 }
 
-// nodeAncestors function
-function nodeAncestors(node) {
-    var pathNode2Root = [];
-    while (node.parent) {
-        pathNode2Root.unshift(node);
-        node = node.parent;
-    }
-    pathNode2Root.unshift(node);
-    return pathNode2Root;
-}
-
 // Drag and zoom functions
 
 function drag_start() {
@@ -624,4 +613,16 @@ function collapseNode(f) {
         f.children = null
     }
     update(f);
+}
+
+
+// nodeAncestors function
+function nodeAncestors(node) {
+    var pathNode2Root = [];
+    while (node.parent) {
+        pathNode2Root.unshift(node);
+        node = node.parent;
+    }
+    pathNode2Root.unshift(node);
+    return pathNode2Root;
 }
